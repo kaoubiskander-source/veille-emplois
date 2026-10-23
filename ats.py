@@ -31,7 +31,7 @@ def slugs(name):
     for x in (base, n):
         w = x.split()
         for s in ("".join(w), "-".join(w)):
-            if len(s) >= 3 and s not in out:
+            if len(s) >= 5 and s not in out:
                 out.append(s)
     return out[:5]
 
@@ -83,7 +83,7 @@ def workable(s):
 
 def workday(host, tenant, site):
     out, off = [], 0
-    while off < 600:
+    while off < 1000:
         r = post("https://%s/wday/cxs/%s/%s/jobs" % (host, tenant, site), {"appliedFacets": {}, "limit": 20, "offset": off, "searchText": ""})
         c = r.get("jobPostings") or []
         for j in c:
@@ -93,7 +93,23 @@ def workday(host, tenant, site):
         off += 20
     return out
 
-READERS = [("greenhouse", greenhouse), ("lever", lever), ("smartrecruiters", smartrecruiters), ("recruitee", recruitee), ("workable", workable)]
+def workday_discover(s):
+    """Devine le site Workday public : <s>.wdN.myworkdayjobs.com -> redirection vers /<langue>/<site>."""
+    for n in (1, 3, 5, 12, 103, 501, 502):
+        host = "%s.wd%d.myworkdayjobs.com" % (s, n)
+        try:
+            req = urllib.request.Request("https://%s/" % host, headers={"User-Agent": UA["User-Agent"]})
+            with urllib.request.urlopen(req, timeout=8) as r:
+                parts = [p for p in urllib.parse.urlparse(r.geturl()).path.split("/") if p and not re.fullmatch(r"[a-z]{2}-[A-Z]{2}", p)]
+        except Exception:
+            continue
+        if parts:
+            jobs = workday(host, s, parts[0])
+            if jobs:
+                return jobs
+    return []
+
+READERS = [("greenhouse", greenhouse), ("lever", lever), ("smartrecruiters", smartrecruiters), ("recruitee", recruitee), ("workable", workable), ("workday", workday_discover)]
 
 def probe(c):
     """Teste les ATS pour une entreprise ; renvoie (id, (ats, slug), offres)."""
@@ -137,9 +153,10 @@ def run(companies):
         except Exception as e:
             print("workday", w, e, file=sys.stderr)
     todo = [c for c in companies if c["id"] not in found]
-    with ThreadPoolExecutor(max_workers=12) as ex:
+    with ThreadPoolExecutor(max_workers=24) as ex:
         for cid, hit, jobs in ex.map(probe, todo):
             if hit:
                 found[cid] = [hit[0], hit[1], len(jobs)]
                 add(byid[cid], hit[0], jobs)
-    return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()}}
+    return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()},
+                  "non_couvertes": [c["name"] for c in companies if c["id"] not in found]}
