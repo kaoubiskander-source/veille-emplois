@@ -1,0 +1,3209 @@
+{
+"companies": [
+{
+"id": 1,
+"name": "EDF",
+"list": "A",
+"flags": ""
+},
+{
+"id": 2,
+"name": "Enedis",
+"list": "A",
+"flags": ""
+},
+{
+"id": 3,
+"name": "RTE",
+"list": "A",
+"flags": ""
+},
+{
+"id": 4,
+"name": "Framatome",
+"list": "A",
+"flags": ""
+},
+{
+"id": 5,
+"name": "Dalkia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 6,
+"name": "EDF Renouvelables",
+"list": "A",
+"flags": ""
+},
+{
+"id": 7,
+"name": "EDF Trading",
+"list": "A",
+"flags": ""
+},
+{
+"id": 8,
+"name": "EDF Pulse",
+"list": "A",
+"flags": ""
+},
+{
+"id": 9,
+"name": "EDF Hydro",
+"list": "A",
+"flags": ""
+},
+{
+"id": 10,
+"name": "Orano",
+"list": "A",
+"flags": ""
+},
+{
+"id": 11,
+"name": "Orano Mining",
+"list": "A",
+"flags": ""
+},
+{
+"id": 12,
+"name": "Orano Recyclage",
+"list": "A",
+"flags": ""
+},
+{
+"id": 13,
+"name": "Orano NPS",
+"list": "A",
+"flags": ""
+},
+{
+"id": 14,
+"name": "Orano Projets",
+"list": "A",
+"flags": ""
+},
+{
+"id": 15,
+"name": "CEA",
+"list": "A",
+"flags": ""
+},
+{
+"id": 16,
+"name": "CEA Tech",
+"list": "A",
+"flags": ""
+},
+{
+"id": 17,
+"name": "CEA-Leti",
+"list": "A",
+"flags": ""
+},
+{
+"id": 18,
+"name": "CEA-Liten",
+"list": "A",
+"flags": ""
+},
+{
+"id": 19,
+"name": "Andra",
+"list": "A",
+"flags": ""
+},
+{
+"id": 20,
+"name": "IRSN",
+"list": "A",
+"flags": "a"
+},
+{
+"id": 21,
+"name": "ASN",
+"list": "A",
+"flags": "a"
+},
+{
+"id": 22,
+"name": "ASNR",
+"list": "A",
+"flags": "a"
+},
+{
+"id": 23,
+"name": "Naval Group",
+"list": "A",
+"flags": ""
+},
+{
+"id": 24,
+"name": "TechnicAtome",
+"list": "A",
+"flags": ""
+},
+{
+"id": 25,
+"name": "KNDS France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 26,
+"name": "Nexter",
+"list": "A",
+"flags": ""
+},
+{
+"id": 27,
+"name": "Thales",
+"list": "A",
+"flags": ""
+},
+{
+"id": 28,
+"name": "Thales LAS France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 29,
+"name": "Thales SIX GTS France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 30,
+"name": "Thales Alenia Space",
+"list": "A",
+"flags": ""
+},
+{
+"id": 31,
+"name": "Thales AVS France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 32,
+"name": "Thales DMS France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 33,
+"name": "Safran",
+"list": "A",
+"flags": ""
+},
+{
+"id": 34,
+"name": "Safran Aircraft Engines",
+"list": "A",
+"flags": ""
+},
+{
+"id": 35,
+"name": "Safran Electronics & Defense",
+"list": "A",
+"flags": ""
+},
+{
+"id": 36,
+"name": "Safran Landing Systems",
+"list": "A",
+"flags": ""
+},
+{
+"id": 37,
+"name": "Safran Helicopter Engines",
+"list": "A",
+"flags": ""
+},
+{
+"id": 38,
+"name": "Safran Nacelles",
+"list": "A",
+"flags": ""
+},
+{
+"id": 39,
+"name": "Safran Seats",
+"list": "A",
+"flags": ""
+},
+{
+"id": 40,
+"name": "Safran Aerosystems",
+"list": "A",
+"flags": ""
+},
+{
+"id": 41,
+"name": "Safran Transmission Systems",
+"list": "A",
+"flags": ""
+},
+{
+"id": 42,
+"name": "Airbus",
+"list": "A",
+"flags": ""
+},
+{
+"id": 43,
+"name": "Airbus Defence and Space",
+"list": "A",
+"flags": ""
+},
+{
+"id": 44,
+"name": "Airbus Helicopters",
+"list": "A",
+"flags": ""
+},
+{
+"id": 45,
+"name": "Airbus Atlantic",
+"list": "A",
+"flags": ""
+},
+{
+"id": 46,
+"name": "ArianeGroup",
+"list": "A",
+"flags": ""
+},
+{
+"id": 47,
+"name": "Arianespace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 48,
+"name": "MBDA France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 49,
+"name": "Dassault Aviation",
+"list": "A",
+"flags": ""
+},
+{
+"id": 50,
+"name": "Orange",
+"list": "A",
+"flags": ""
+},
+{
+"id": 51,
+"name": "Orange Business",
+"list": "A",
+"flags": ""
+},
+{
+"id": 52,
+"name": "Orange Wholesale",
+"list": "A",
+"flags": ""
+},
+{
+"id": 53,
+"name": "Orange Cyberdefense",
+"list": "A",
+"flags": ""
+},
+{
+"id": 54,
+"name": "La Poste Groupe",
+"list": "A",
+"flags": ""
+},
+{
+"id": 55,
+"name": "La Banque Postale",
+"list": "A",
+"flags": ""
+},
+{
+"id": 56,
+"name": "Geopost",
+"list": "A",
+"flags": ""
+},
+{
+"id": 57,
+"name": "Chronopost",
+"list": "A",
+"flags": ""
+},
+{
+"id": 58,
+"name": "Colissimo",
+"list": "A",
+"flags": ""
+},
+{
+"id": 59,
+"name": "Docaposte",
+"list": "A",
+"flags": ""
+},
+{
+"id": 60,
+"name": "SNCF Groupe",
+"list": "A",
+"flags": ""
+},
+{
+"id": 61,
+"name": "SNCF Réseau",
+"list": "A",
+"flags": ""
+},
+{
+"id": 62,
+"name": "SNCF Voyageurs",
+"list": "A",
+"flags": ""
+},
+{
+"id": 63,
+"name": "SNCF Gares & Connexions",
+"list": "A",
+"flags": ""
+},
+{
+"id": 64,
+"name": "Fret SNCF",
+"list": "A",
+"flags": ""
+},
+{
+"id": 65,
+"name": "Rail Logistics Europe",
+"list": "A",
+"flags": ""
+},
+{
+"id": 66,
+"name": "Keolis",
+"list": "A",
+"flags": ""
+},
+{
+"id": 67,
+"name": "RATP",
+"list": "A",
+"flags": ""
+},
+{
+"id": 68,
+"name": "RATP Dev",
+"list": "A",
+"flags": ""
+},
+{
+"id": 69,
+"name": "Systra",
+"list": "A",
+"flags": ""
+},
+{
+"id": 70,
+"name": "Groupe ADP",
+"list": "A",
+"flags": ""
+},
+{
+"id": 71,
+"name": "Air France-KLM",
+"list": "A",
+"flags": ""
+},
+{
+"id": 72,
+"name": "Air France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 73,
+"name": "KLM France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 74,
+"name": "Transavia France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 75,
+"name": "Engie",
+"list": "A",
+"flags": ""
+},
+{
+"id": 76,
+"name": "GRDF",
+"list": "A",
+"flags": ""
+},
+{
+"id": 77,
+"name": "GRTgaz",
+"list": "A",
+"flags": ""
+},
+{
+"id": 78,
+"name": "Storengy",
+"list": "A",
+"flags": ""
+},
+{
+"id": 79,
+"name": "Elengy",
+"list": "A",
+"flags": ""
+},
+{
+"id": 80,
+"name": "ENGIE Solutions",
+"list": "A",
+"flags": ""
+},
+{
+"id": 81,
+"name": "ENGIE Home Services",
+"list": "A",
+"flags": ""
+},
+{
+"id": 82,
+"name": "CPCU",
+"list": "A",
+"flags": ""
+},
+{
+"id": 83,
+"name": "FDJ United",
+"list": "A",
+"flags": ""
+},
+{
+"id": 84,
+"name": "Renault Group",
+"list": "A",
+"flags": ""
+},
+{
+"id": 85,
+"name": "Ampere",
+"list": "A",
+"flags": ""
+},
+{
+"id": 86,
+"name": "Mobilize",
+"list": "A",
+"flags": ""
+},
+{
+"id": 87,
+"name": "Eramet",
+"list": "A",
+"flags": ""
+},
+{
+"id": 88,
+"name": "Aubert & Duval",
+"list": "A",
+"flags": ""
+},
+{
+"id": 89,
+"name": "Constellium",
+"list": "A",
+"flags": ""
+},
+{
+"id": 90,
+"name": "Imprimerie Nationale",
+"list": "A",
+"flags": ""
+},
+{
+"id": 91,
+"name": "IN Groupe",
+"list": "A",
+"flags": ""
+},
+{
+"id": 92,
+"name": "Monnaie de Paris",
+"list": "A",
+"flags": ""
+},
+{
+"id": 93,
+"name": "SFIL",
+"list": "A",
+"flags": ""
+},
+{
+"id": 94,
+"name": "Bpifrance",
+"list": "A",
+"flags": ""
+},
+{
+"id": 95,
+"name": "Caisse des Dépôts",
+"list": "A",
+"flags": ""
+},
+{
+"id": 96,
+"name": "CDC Habitat",
+"list": "A",
+"flags": ""
+},
+{
+"id": 97,
+"name": "Icade",
+"list": "A",
+"flags": ""
+},
+{
+"id": 98,
+"name": "Egis",
+"list": "A",
+"flags": ""
+},
+{
+"id": 99,
+"name": "SCET",
+"list": "A",
+"flags": ""
+},
+{
+"id": 100,
+"name": "Transdev",
+"list": "A",
+"flags": ""
+},
+{
+"id": 101,
+"name": "La Méridionale",
+"list": "A",
+"flags": ""
+},
+{
+"id": 102,
+"name": "CMA CGM Air Cargo",
+"list": "A",
+"flags": ""
+},
+{
+"id": 103,
+"name": "TotalEnergies",
+"list": "A",
+"flags": ""
+},
+{
+"id": 104,
+"name": "TotalEnergies Renewables",
+"list": "A",
+"flags": ""
+},
+{
+"id": 105,
+"name": "TotalEnergies Marketing France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 106,
+"name": "TotalEnergies Electricité et Gaz France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 107,
+"name": "Air Liquide",
+"list": "A",
+"flags": ""
+},
+{
+"id": 108,
+"name": "Air Liquide France Industrie",
+"list": "A",
+"flags": ""
+},
+{
+"id": 109,
+"name": "Air Liquide Healthcare",
+"list": "A",
+"flags": ""
+},
+{
+"id": 110,
+"name": "Air Liquide Advanced Technologies",
+"list": "A",
+"flags": ""
+},
+{
+"id": 111,
+"name": "Schneider Electric",
+"list": "A",
+"flags": ""
+},
+{
+"id": 112,
+"name": "Legrand",
+"list": "A",
+"flags": ""
+},
+{
+"id": 113,
+"name": "Rexel",
+"list": "A",
+"flags": ""
+},
+{
+"id": 114,
+"name": "Sonepar",
+"list": "A",
+"flags": ""
+},
+{
+"id": 115,
+"name": "Sicame Group",
+"list": "A",
+"flags": ""
+},
+{
+"id": 116,
+"name": "Nexans",
+"list": "A",
+"flags": ""
+},
+{
+"id": 117,
+"name": "Prysmian Group France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 118,
+"name": "SPIE",
+"list": "A",
+"flags": ""
+},
+{
+"id": 119,
+"name": "SPIE Industrie",
+"list": "A",
+"flags": ""
+},
+{
+"id": 120,
+"name": "SPIE CityNetworks",
+"list": "A",
+"flags": ""
+},
+{
+"id": 121,
+"name": "Equans",
+"list": "A",
+"flags": ""
+},
+{
+"id": 122,
+"name": "Equans France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 123,
+"name": "Bouygues Energies & Services",
+"list": "A",
+"flags": ""
+},
+{
+"id": 124,
+"name": "Actemium",
+"list": "A",
+"flags": ""
+},
+{
+"id": 125,
+"name": "Omexom",
+"list": "A",
+"flags": ""
+},
+{
+"id": 126,
+"name": "Cegelec",
+"list": "A",
+"flags": ""
+},
+{
+"id": 127,
+"name": "Vinci Energies",
+"list": "A",
+"flags": ""
+},
+{
+"id": 128,
+"name": "Idex",
+"list": "A",
+"flags": ""
+},
+{
+"id": 129,
+"name": "Coriance",
+"list": "A",
+"flags": ""
+},
+{
+"id": 130,
+"name": "Suez",
+"list": "A",
+"flags": ""
+},
+{
+"id": 131,
+"name": "Suez Eau France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 132,
+"name": "Suez RV France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 133,
+"name": "Veolia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 134,
+"name": "Veolia Eau France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 135,
+"name": "Veolia Recyclage et Valorisation",
+"list": "A",
+"flags": ""
+},
+{
+"id": 136,
+"name": "SAUR",
+"list": "A",
+"flags": ""
+},
+{
+"id": 137,
+"name": "Saur France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 138,
+"name": "Stereau",
+"list": "A",
+"flags": ""
+},
+{
+"id": 139,
+"name": "Société des Eaux de Marseille",
+"list": "A",
+"flags": ""
+},
+{
+"id": 140,
+"name": "Eau de Paris",
+"list": "A",
+"flags": ""
+},
+{
+"id": 141,
+"name": "SEMMARIS",
+"list": "A",
+"flags": ""
+},
+{
+"id": 142,
+"name": "Siaap",
+"list": "A",
+"flags": ""
+},
+{
+"id": 143,
+"name": "Syctom",
+"list": "A",
+"flags": ""
+},
+{
+"id": 144,
+"name": "Semardel",
+"list": "A",
+"flags": ""
+},
+{
+"id": 145,
+"name": "Paprec Group",
+"list": "A",
+"flags": ""
+},
+{
+"id": 146,
+"name": "Derichebourg Environnement",
+"list": "A",
+"flags": ""
+},
+{
+"id": 147,
+"name": "Séché Environnement",
+"list": "A",
+"flags": ""
+},
+{
+"id": 148,
+"name": "Urbaser Environnement",
+"list": "A",
+"flags": ""
+},
+{
+"id": 149,
+"name": "TIRU",
+"list": "A",
+"flags": ""
+},
+{
+"id": 150,
+"name": "Dalkia Froid Solutions",
+"list": "A",
+"flags": ""
+},
+{
+"id": 151,
+"name": "GreenYellow",
+"list": "A",
+"flags": ""
+},
+{
+"id": 152,
+"name": "Akuo Energy",
+"list": "A",
+"flags": ""
+},
+{
+"id": 153,
+"name": "Voltalia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 154,
+"name": "Neoen",
+"list": "A",
+"flags": ""
+},
+{
+"id": 155,
+"name": "Qair",
+"list": "A",
+"flags": ""
+},
+{
+"id": 156,
+"name": "Valorem",
+"list": "A",
+"flags": ""
+},
+{
+"id": 157,
+"name": "Boralex France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 158,
+"name": "BayWa r.e. France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 159,
+"name": "VSB Energies Nouvelles",
+"list": "A",
+"flags": ""
+},
+{
+"id": 160,
+"name": "RES France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 161,
+"name": "EDF ENR",
+"list": "A",
+"flags": ""
+},
+{
+"id": 162,
+"name": "Iberdrola France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 163,
+"name": "EnBW France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 164,
+"name": "RWE Renewables France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 165,
+"name": "Octopus Energy France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 166,
+"name": "Ekwateur",
+"list": "A",
+"flags": ""
+},
+{
+"id": 167,
+"name": "Primeo Energie France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 168,
+"name": "Teréga",
+"list": "A",
+"flags": ""
+},
+{
+"id": 169,
+"name": "NaTran",
+"list": "A",
+"flags": ""
+},
+{
+"id": 170,
+"name": "GazelEnergie",
+"list": "A",
+"flags": ""
+},
+{
+"id": 171,
+"name": "Antargaz Energies",
+"list": "A",
+"flags": ""
+},
+{
+"id": 172,
+"name": "Butagaz",
+"list": "A",
+"flags": ""
+},
+{
+"id": 173,
+"name": "Primagaz",
+"list": "A",
+"flags": ""
+},
+{
+"id": 174,
+"name": "Waga Energy",
+"list": "A",
+"flags": ""
+},
+{
+"id": 175,
+"name": "McPhy Energy",
+"list": "A",
+"flags": ""
+},
+{
+"id": 176,
+"name": "Genvia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 177,
+"name": "Lhyfe",
+"list": "A",
+"flags": ""
+},
+{
+"id": 178,
+"name": "Hynamics",
+"list": "A",
+"flags": ""
+},
+{
+"id": 179,
+"name": "HysetCo",
+"list": "A",
+"flags": ""
+},
+{
+"id": 180,
+"name": "EODev",
+"list": "A",
+"flags": ""
+},
+{
+"id": 181,
+"name": "Symbio",
+"list": "A",
+"flags": ""
+},
+{
+"id": 182,
+"name": "Forvia Hydrogen Solutions",
+"list": "A",
+"flags": ""
+},
+{
+"id": 183,
+"name": "Plastic Omnium New Energies",
+"list": "A",
+"flags": ""
+},
+{
+"id": 184,
+"name": "Alstom",
+"list": "A",
+"flags": ""
+},
+{
+"id": 185,
+"name": "Alstom Transport France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 186,
+"name": "CAF France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 187,
+"name": "Siemens Mobility France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 188,
+"name": "Hitachi Rail France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 189,
+"name": "Stadler France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 190,
+"name": "Wabtec France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 191,
+"name": "Knorr-Bremse France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 192,
+"name": "Faiveley Transport",
+"list": "A",
+"flags": ""
+},
+{
+"id": 193,
+"name": "Voith Turbo France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 194,
+"name": "Sateba",
+"list": "A",
+"flags": ""
+},
+{
+"id": 195,
+"name": "Pandrol",
+"list": "A",
+"flags": ""
+},
+{
+"id": 196,
+"name": "Vossloh Cogifer",
+"list": "A",
+"flags": ""
+},
+{
+"id": 197,
+"name": "Colas Rail",
+"list": "A",
+"flags": ""
+},
+{
+"id": 198,
+"name": "ETF",
+"list": "A",
+"flags": ""
+},
+{
+"id": 199,
+"name": "Eiffage Rail",
+"list": "A",
+"flags": ""
+},
+{
+"id": 200,
+"name": "TSO",
+"list": "A",
+"flags": ""
+},
+{
+"id": 201,
+"name": "NGE",
+"list": "A",
+"flags": ""
+},
+{
+"id": 202,
+"name": "NGE Fondations",
+"list": "A",
+"flags": ""
+},
+{
+"id": 203,
+"name": "Groupe Colas",
+"list": "A",
+"flags": ""
+},
+{
+"id": 204,
+"name": "Eurovia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 205,
+"name": "Vinci Autoroutes",
+"list": "A",
+"flags": ""
+},
+{
+"id": 206,
+"name": "ASF",
+"list": "A",
+"flags": ""
+},
+{
+"id": 207,
+"name": "Cofiroute",
+"list": "A",
+"flags": ""
+},
+{
+"id": 208,
+"name": "Escota",
+"list": "A",
+"flags": ""
+},
+{
+"id": 209,
+"name": "APRR",
+"list": "A",
+"flags": ""
+},
+{
+"id": 210,
+"name": "AREA",
+"list": "A",
+"flags": ""
+},
+{
+"id": 211,
+"name": "Sanef",
+"list": "A",
+"flags": ""
+},
+{
+"id": 212,
+"name": "SAPN",
+"list": "A",
+"flags": ""
+},
+{
+"id": 213,
+"name": "Eiffage Route",
+"list": "A",
+"flags": ""
+},
+{
+"id": 214,
+"name": "Eiffage Génie Civil",
+"list": "A",
+"flags": ""
+},
+{
+"id": 215,
+"name": "Eiffage Énergie Systèmes",
+"list": "A",
+"flags": ""
+},
+{
+"id": 216,
+"name": "Bouygues Travaux Publics",
+"list": "A",
+"flags": ""
+},
+{
+"id": 217,
+"name": "Bouygues Construction",
+"list": "A",
+"flags": ""
+},
+{
+"id": 218,
+"name": "Vinci Construction",
+"list": "A",
+"flags": ""
+},
+{
+"id": 219,
+"name": "Razel-Bec",
+"list": "A",
+"flags": ""
+},
+{
+"id": 220,
+"name": "Fayat",
+"list": "A",
+"flags": ""
+},
+{
+"id": 221,
+"name": "Fayat Énergie Services",
+"list": "A",
+"flags": ""
+},
+{
+"id": 222,
+"name": "Demathieu Bard",
+"list": "A",
+"flags": ""
+},
+{
+"id": 223,
+"name": "NGE Concessions",
+"list": "A",
+"flags": ""
+},
+{
+"id": 224,
+"name": "Egis Rail",
+"list": "A",
+"flags": ""
+},
+{
+"id": 225,
+"name": "Egis Routes",
+"list": "A",
+"flags": ""
+},
+{
+"id": 226,
+"name": "Setec",
+"list": "A",
+"flags": ""
+},
+{
+"id": 227,
+"name": "Setec Ferroviaire",
+"list": "A",
+"flags": ""
+},
+{
+"id": 228,
+"name": "Setec TPI",
+"list": "A",
+"flags": ""
+},
+{
+"id": 229,
+"name": "Artelia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 230,
+"name": "Arcadis France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 231,
+"name": "Ingérop",
+"list": "A",
+"flags": ""
+},
+{
+"id": 232,
+"name": "Tractebel Engineering France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 233,
+"name": "Assystem",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 234,
+"name": "Bertrandt France",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 235,
+"name": "Akkodis France",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 236,
+"name": "Expleo France",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 237,
+"name": "Segula Technologies",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 238,
+"name": "AKKA Technologies",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 239,
+"name": "SNCF Connect & Tech",
+"list": "A",
+"flags": ""
+},
+{
+"id": 240,
+"name": "Geodis",
+"list": "A",
+"flags": ""
+},
+{
+"id": 241,
+"name": "Geodis Road Transport",
+"list": "A",
+"flags": ""
+},
+{
+"id": 242,
+"name": "STEF",
+"list": "A",
+"flags": ""
+},
+{
+"id": 243,
+"name": "ID Logistics",
+"list": "A",
+"flags": ""
+},
+{
+"id": 244,
+"name": "FM Logistic",
+"list": "A",
+"flags": ""
+},
+{
+"id": 245,
+"name": "XPO Logistics France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 246,
+"name": "Daher",
+"list": "A",
+"flags": ""
+},
+{
+"id": 247,
+"name": "Daher Aerospace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 248,
+"name": "DB Cargo France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 249,
+"name": "Euro Cargo Rail",
+"list": "A",
+"flags": ""
+},
+{
+"id": 250,
+"name": "Lineas France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 251,
+"name": "Captrain France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 252,
+"name": "VFLI",
+"list": "A",
+"flags": ""
+},
+{
+"id": 253,
+"name": "Getlink",
+"list": "A",
+"flags": ""
+},
+{
+"id": 254,
+"name": "Eurotunnel",
+"list": "A",
+"flags": ""
+},
+{
+"id": 255,
+"name": "Europorte",
+"list": "A",
+"flags": ""
+},
+{
+"id": 256,
+"name": "CMA CGM",
+"list": "A",
+"flags": ""
+},
+{
+"id": 257,
+"name": "CMA CGM Inland Services",
+"list": "A",
+"flags": ""
+},
+{
+"id": 258,
+"name": "Brittany Ferries",
+"list": "A",
+"flags": ""
+},
+{
+"id": 259,
+"name": "Corsica Linea",
+"list": "A",
+"flags": ""
+},
+{
+"id": 260,
+"name": "Ponant",
+"list": "A",
+"flags": ""
+},
+{
+"id": 261,
+"name": "Groupe Beneteau",
+"list": "A",
+"flags": ""
+},
+{
+"id": 262,
+"name": "Chantiers de l'Atlantique",
+"list": "A",
+"flags": ""
+},
+{
+"id": 263,
+"name": "Piriou",
+"list": "A",
+"flags": ""
+},
+{
+"id": 264,
+"name": "OCEA",
+"list": "A",
+"flags": ""
+},
+{
+"id": 265,
+"name": "SNCF Logistics",
+"list": "A",
+"flags": ""
+},
+{
+"id": 266,
+"name": "Bolloré Logistics",
+"list": "A",
+"flags": "a"
+},
+{
+"id": 267,
+"name": "CEVA Logistics France",
+"list": "A",
+"flags": "a"
+},
+{
+"id": 268,
+"name": "Kuehne+Nagel France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 269,
+"name": "DHL Global Forwarding France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 270,
+"name": "Arquus",
+"list": "A",
+"flags": ""
+},
+{
+"id": 271,
+"name": "Arquus Défense",
+"list": "A",
+"flags": ""
+},
+{
+"id": 272,
+"name": "Exail",
+"list": "A",
+"flags": ""
+},
+{
+"id": 273,
+"name": "Exail Robotics",
+"list": "A",
+"flags": ""
+},
+{
+"id": 274,
+"name": "iXblue",
+"list": "A",
+"flags": ""
+},
+{
+"id": 275,
+"name": "Lacroix Defense",
+"list": "A",
+"flags": ""
+},
+{
+"id": 276,
+"name": "Lacroix Electronics",
+"list": "A",
+"flags": ""
+},
+{
+"id": 277,
+"name": "ECA Group",
+"list": "A",
+"flags": ""
+},
+{
+"id": 278,
+"name": "CNIM Systèmes Industriels",
+"list": "A",
+"flags": ""
+},
+{
+"id": 279,
+"name": "Arquus Services",
+"list": "A",
+"flags": ""
+},
+{
+"id": 280,
+"name": "Roxel France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 281,
+"name": "Eurenco",
+"list": "A",
+"flags": ""
+},
+{
+"id": 282,
+"name": "Eurenco France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 283,
+"name": "Manurhin",
+"list": "A",
+"flags": ""
+},
+{
+"id": 284,
+"name": "Verney-Carron Défense",
+"list": "A",
+"flags": ""
+},
+{
+"id": 285,
+"name": "Turgis & Gaillard",
+"list": "A",
+"flags": ""
+},
+{
+"id": 286,
+"name": "Hutchinson",
+"list": "A",
+"flags": ""
+},
+{
+"id": 287,
+"name": "Hutchinson Aerospace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 288,
+"name": "Latecoere",
+"list": "A",
+"flags": ""
+},
+{
+"id": 289,
+"name": "Latécoère Interconnection Systems",
+"list": "A",
+"flags": ""
+},
+{
+"id": 290,
+"name": "Liebherr-Aerospace Toulouse",
+"list": "A",
+"flags": ""
+},
+{
+"id": 291,
+"name": "Liebherr-France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 292,
+"name": "Liebherr Components Colmar",
+"list": "A",
+"flags": ""
+},
+{
+"id": 293,
+"name": "Collins Aerospace France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 294,
+"name": "Pratt & Whitney France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 295,
+"name": "MTU Aero Engines France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 296,
+"name": "Parker Hannifin France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 297,
+"name": "Howmet Aerospace France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 298,
+"name": "Hexcel Composites",
+"list": "A",
+"flags": ""
+},
+{
+"id": 299,
+"name": "Stelia Aerospace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 300,
+"name": "Aertec Solutions France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 301,
+"name": "Sabena Technics",
+"list": "A",
+"flags": ""
+},
+{
+"id": 302,
+"name": "Sabena Technics BGC",
+"list": "A",
+"flags": ""
+},
+{
+"id": 303,
+"name": "Daher Aerospace Tarbes",
+"list": "A",
+"flags": ""
+},
+{
+"id": 304,
+"name": "Satys Aerospace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 305,
+"name": "AAA - Assistance Aéronautique et Aérospatiale",
+"list": "A",
+"flags": ""
+},
+{
+"id": 306,
+"name": "AAA Industries",
+"list": "A",
+"flags": ""
+},
+{
+"id": 307,
+"name": "AAA Canada France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 308,
+"name": "Sogeclair Aerospace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 309,
+"name": "AAA Data",
+"list": "A",
+"flags": ""
+},
+{
+"id": 310,
+"name": "Ametra Engineering",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 311,
+"name": "Apside",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 312,
+"name": "CS Group",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 313,
+"name": "Sopra Steria Défense & Sécurité",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 314,
+"name": "Atos Eviden",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 315,
+"name": "Eviden France",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 316,
+"name": "Atos France",
+"list": "A",
+"flags": "e"
+},
+{
+"id": 317,
+"name": "Worldline",
+"list": "A",
+"flags": ""
+},
+{
+"id": 318,
+"name": "Idemia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 319,
+"name": "Idemia Identity & Security France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 320,
+"name": "Idemia Smart Identity",
+"list": "A",
+"flags": ""
+},
+{
+"id": 321,
+"name": "Evidian",
+"list": "A",
+"flags": ""
+},
+{
+"id": 322,
+"name": "Stormshield",
+"list": "A",
+"flags": ""
+},
+{
+"id": 323,
+"name": "Airbus Protect",
+"list": "A",
+"flags": ""
+},
+{
+"id": 324,
+"name": "Airbus CyberSecurity",
+"list": "A",
+"flags": ""
+},
+{
+"id": 325,
+"name": "Naval Energies",
+"list": "A",
+"flags": ""
+},
+{
+"id": 326,
+"name": "CNES",
+"list": "A",
+"flags": ""
+},
+{
+"id": 327,
+"name": "ONERA",
+"list": "A",
+"flags": ""
+},
+{
+"id": 328,
+"name": "DGA Techniques terrestres",
+"list": "A",
+"flags": ""
+},
+{
+"id": 329,
+"name": "DGA Techniques navales",
+"list": "A",
+"flags": ""
+},
+{
+"id": 330,
+"name": "DGA Maîtrise de l'information",
+"list": "A",
+"flags": ""
+},
+{
+"id": 331,
+"name": "DGA Essais en vol",
+"list": "A",
+"flags": ""
+},
+{
+"id": 332,
+"name": "Institut Saint-Louis",
+"list": "A",
+"flags": ""
+},
+{
+"id": 333,
+"name": "ArianeGroup Les Mureaux",
+"list": "A",
+"flags": ""
+},
+{
+"id": 334,
+"name": "ArianeGroup Vernon",
+"list": "A",
+"flags": ""
+},
+{
+"id": 335,
+"name": "Avio France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 336,
+"name": "MaiaSpace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 337,
+"name": "Latitude",
+"list": "A",
+"flags": ""
+},
+{
+"id": 338,
+"name": "Exotrail",
+"list": "A",
+"flags": ""
+},
+{
+"id": 339,
+"name": "Hemeria",
+"list": "A",
+"flags": ""
+},
+{
+"id": 340,
+"name": "Unseenlabs",
+"list": "A",
+"flags": ""
+},
+{
+"id": 341,
+"name": "Kinéis",
+"list": "A",
+"flags": ""
+},
+{
+"id": 342,
+"name": "Loft Orbital France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 343,
+"name": "Sodern",
+"list": "A",
+"flags": ""
+},
+{
+"id": 344,
+"name": "CSUM",
+"list": "A",
+"flags": ""
+},
+{
+"id": 345,
+"name": "Anywaves",
+"list": "A",
+"flags": ""
+},
+{
+"id": 346,
+"name": "Comat",
+"list": "A",
+"flags": ""
+},
+{
+"id": 347,
+"name": "Mecachrome",
+"list": "A",
+"flags": ""
+},
+{
+"id": 348,
+"name": "Mecachrome France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 349,
+"name": "Mecachrome Atlantique",
+"list": "A",
+"flags": ""
+},
+{
+"id": 350,
+"name": "Aubert & Duval Aerospace",
+"list": "A",
+"flags": ""
+},
+{
+"id": 351,
+"name": "Figeac Aero",
+"list": "A",
+"flags": ""
+},
+{
+"id": 352,
+"name": "Figeac Aero Picardie",
+"list": "A",
+"flags": ""
+},
+{
+"id": 353,
+"name": "AAA Aero",
+"list": "A",
+"flags": ""
+},
+{
+"id": 354,
+"name": "Elixir Aircraft",
+"list": "A",
+"flags": ""
+},
+{
+"id": 355,
+"name": "Aura Aero",
+"list": "A",
+"flags": ""
+},
+{
+"id": 356,
+"name": "Dijon Céréales Défense",
+"list": "A",
+"flags": ""
+},
+{
+"id": 357,
+"name": "Saint-Gobain",
+"list": "B",
+"flags": ""
+},
+{
+"id": 358,
+"name": "Saint-Gobain Glass",
+"list": "B",
+"flags": ""
+},
+{
+"id": 359,
+"name": "Saint-Gobain PAM",
+"list": "B",
+"flags": ""
+},
+{
+"id": 360,
+"name": "Saint-Gobain Sekurit",
+"list": "B",
+"flags": ""
+},
+{
+"id": 361,
+"name": "Saint-Gobain Weber",
+"list": "B",
+"flags": ""
+},
+{
+"id": 362,
+"name": "Lafarge France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 363,
+"name": "Holcim France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 364,
+"name": "Vicat",
+"list": "B",
+"flags": ""
+},
+{
+"id": 365,
+"name": "Eqiom",
+"list": "B",
+"flags": ""
+},
+{
+"id": 366,
+"name": "Ciments Calcia",
+"list": "B",
+"flags": ""
+},
+{
+"id": 367,
+"name": "Imerys",
+"list": "B",
+"flags": ""
+},
+{
+"id": 368,
+"name": "Imerys Refractory Minerals",
+"list": "B",
+"flags": ""
+},
+{
+"id": 369,
+"name": "Arkema",
+"list": "B",
+"flags": ""
+},
+{
+"id": 370,
+"name": "Arkema France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 371,
+"name": "Bostik",
+"list": "B",
+"flags": ""
+},
+{
+"id": 372,
+"name": "Kem One",
+"list": "B",
+"flags": ""
+},
+{
+"id": 373,
+"name": "Solvay France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 374,
+"name": "Seqens",
+"list": "B",
+"flags": ""
+},
+{
+"id": 375,
+"name": "Seqens Custom Specialties",
+"list": "B",
+"flags": ""
+},
+{
+"id": 376,
+"name": "Eramet Alloys",
+"list": "B",
+"flags": ""
+},
+{
+"id": 377,
+"name": "Eramet Comilog",
+"list": "B",
+"flags": ""
+},
+{
+"id": 378,
+"name": "Aperam",
+"list": "B",
+"flags": ""
+},
+{
+"id": 379,
+"name": "ArcelorMittal France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 380,
+"name": "ArcelorMittal Méditerranée",
+"list": "B",
+"flags": ""
+},
+{
+"id": 381,
+"name": "ArcelorMittal Atlantique et Lorraine",
+"list": "B",
+"flags": ""
+},
+{
+"id": 382,
+"name": "Ascometal",
+"list": "B",
+"flags": ""
+},
+{
+"id": 383,
+"name": "Vallourec",
+"list": "B",
+"flags": ""
+},
+{
+"id": 384,
+"name": "Vallourec Tubes France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 385,
+"name": "Vallourec Oil and Gas France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 386,
+"name": "Constellium Issoire",
+"list": "B",
+"flags": ""
+},
+{
+"id": 387,
+"name": "Constellium Neuf-Brisach",
+"list": "B",
+"flags": ""
+},
+{
+"id": 388,
+"name": "Rio Tinto Aluminium Dunkerque",
+"list": "B",
+"flags": ""
+},
+{
+"id": 389,
+"name": "Aluminium Dunkerque",
+"list": "B",
+"flags": ""
+},
+{
+"id": 390,
+"name": "Norsk Hydro France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 391,
+"name": "Trimet France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 392,
+"name": "Ugitech",
+"list": "B",
+"flags": ""
+},
+{
+"id": 393,
+"name": "Aperam Stainless France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 394,
+"name": "Industeel France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 395,
+"name": "Aubert & Duval Les Ancizes",
+"list": "B",
+"flags": ""
+},
+{
+"id": 396,
+"name": "Aubert & Duval Firminy",
+"list": "B",
+"flags": ""
+},
+{
+"id": 397,
+"name": "Saarstahl Rail",
+"list": "B",
+"flags": ""
+},
+{
+"id": 398,
+"name": "Saarstahl Ascoval",
+"list": "B",
+"flags": ""
+},
+{
+"id": 399,
+"name": "Framatome Le Creusot",
+"list": "B",
+"flags": ""
+},
+{
+"id": 400,
+"name": "Framatome Jeumont",
+"list": "B",
+"flags": ""
+},
+{
+"id": 401,
+"name": "Fives",
+"list": "B",
+"flags": ""
+},
+{
+"id": 402,
+"name": "Fives Group",
+"list": "B",
+"flags": ""
+},
+{
+"id": 403,
+"name": "Fives Stein",
+"list": "B",
+"flags": ""
+},
+{
+"id": 404,
+"name": "Fives FCB",
+"list": "B",
+"flags": ""
+},
+{
+"id": 405,
+"name": "Fives Maintenance",
+"list": "B",
+"flags": ""
+},
+{
+"id": 406,
+"name": "Fives Nordon",
+"list": "B",
+"flags": ""
+},
+{
+"id": 407,
+"name": "John Cockerill France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 408,
+"name": "Reel International",
+"list": "B",
+"flags": ""
+},
+{
+"id": 409,
+"name": "REEL SAS",
+"list": "B",
+"flags": ""
+},
+{
+"id": 410,
+"name": "Ponticelli Frères",
+"list": "B",
+"flags": ""
+},
+{
+"id": 411,
+"name": "Ponticelli Solutions",
+"list": "B",
+"flags": ""
+},
+{
+"id": 412,
+"name": "Ortec Group",
+"list": "B",
+"flags": ""
+},
+{
+"id": 413,
+"name": "Ortec Industrie",
+"list": "B",
+"flags": ""
+},
+{
+"id": 414,
+"name": "Groupe ADF",
+"list": "B",
+"flags": ""
+},
+{
+"id": 415,
+"name": "ADF Nucleaire",
+"list": "B",
+"flags": ""
+},
+{
+"id": 416,
+"name": "FOSELEV",
+"list": "B",
+"flags": ""
+},
+{
+"id": 417,
+"name": "Boccard",
+"list": "B",
+"flags": ""
+},
+{
+"id": 418,
+"name": "Boccard France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 419,
+"name": "Endel",
+"list": "B",
+"flags": ""
+},
+{
+"id": 420,
+"name": "ALTRAD Endel",
+"list": "B",
+"flags": ""
+},
+{
+"id": 421,
+"name": "Altrad Services",
+"list": "B",
+"flags": ""
+},
+{
+"id": 422,
+"name": "Baudin Chateauneuf",
+"list": "B",
+"flags": ""
+},
+{
+"id": 423,
+"name": "Dietsmann France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 424,
+"name": "GTT - Gaztransport & Technigaz",
+"list": "B",
+"flags": ""
+},
+{
+"id": 425,
+"name": "Technip Energies France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 426,
+"name": "Subsea7 France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 427,
+"name": "Saipem France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 428,
+"name": "Vallourec Umbilicals",
+"list": "B",
+"flags": ""
+},
+{
+"id": 429,
+"name": "Serimax",
+"list": "B",
+"flags": ""
+},
+{
+"id": 430,
+"name": "Groupe Gorgé",
+"list": "B",
+"flags": ""
+},
+{
+"id": 431,
+"name": "Exail Technologies",
+"list": "B",
+"flags": ""
+},
+{
+"id": 432,
+"name": "Prodways Group",
+"list": "B",
+"flags": ""
+},
+{
+"id": 433,
+"name": "Radiall",
+"list": "B",
+"flags": ""
+},
+{
+"id": 434,
+"name": "Radiall France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 435,
+"name": "Lisi Aerospace",
+"list": "B",
+"flags": ""
+},
+{
+"id": 436,
+"name": "Lisi Automotive",
+"list": "B",
+"flags": ""
+},
+{
+"id": 437,
+"name": "Lisi Medical",
+"list": "B",
+"flags": ""
+},
+{
+"id": 438,
+"name": "Valeo",
+"list": "B",
+"flags": ""
+},
+{
+"id": 439,
+"name": "Valeo Service",
+"list": "B",
+"flags": ""
+},
+{
+"id": 440,
+"name": "Valeo Siemens eAutomotive",
+"list": "B",
+"flags": ""
+},
+{
+"id": 441,
+"name": "Forvia",
+"list": "B",
+"flags": ""
+},
+{
+"id": 442,
+"name": "Forvia Faurecia",
+"list": "B",
+"flags": ""
+},
+{
+"id": 443,
+"name": "Faurecia Automotive Seating",
+"list": "B",
+"flags": ""
+},
+{
+"id": 444,
+"name": "Faurecia Clean Mobility",
+"list": "B",
+"flags": ""
+},
+{
+"id": 445,
+"name": "OPmobility",
+"list": "B",
+"flags": ""
+},
+{
+"id": 446,
+"name": "Plastic Omnium",
+"list": "B",
+"flags": ""
+},
+{
+"id": 447,
+"name": "Michelin",
+"list": "B",
+"flags": ""
+},
+{
+"id": 448,
+"name": "Michelin France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 449,
+"name": "Roquette",
+"list": "B",
+"flags": ""
+},
+{
+"id": 450,
+"name": "Roquette Frères",
+"list": "B",
+"flags": ""
+},
+{
+"id": 451,
+"name": "Tereos",
+"list": "B",
+"flags": ""
+},
+{
+"id": 452,
+"name": "Tereos Starch & Sweeteners",
+"list": "B",
+"flags": ""
+},
+{
+"id": 453,
+"name": "Avril",
+"list": "B",
+"flags": ""
+},
+{
+"id": 454,
+"name": "Saipol",
+"list": "B",
+"flags": ""
+},
+{
+"id": 455,
+"name": "Lesaffre",
+"list": "B",
+"flags": ""
+},
+{
+"id": 456,
+"name": "Bonduelle",
+"list": "B",
+"flags": ""
+},
+{
+"id": 457,
+"name": "Bel Group",
+"list": "B",
+"flags": ""
+},
+{
+"id": 458,
+"name": "Lactalis",
+"list": "B",
+"flags": ""
+},
+{
+"id": 459,
+"name": "Danone",
+"list": "B",
+"flags": ""
+},
+{
+"id": 460,
+"name": "Danone France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 461,
+"name": "Savencia",
+"list": "B",
+"flags": ""
+},
+{
+"id": 462,
+"name": "Sodiaal",
+"list": "B",
+"flags": ""
+},
+{
+"id": 463,
+"name": "Eurial",
+"list": "B",
+"flags": ""
+},
+{
+"id": 464,
+"name": "Yoplait France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 465,
+"name": "ABB France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 466,
+"name": "Siemens France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 467,
+"name": "Siemens Smart Infrastructure",
+"list": "B",
+"flags": ""
+},
+{
+"id": 468,
+"name": "Siemens Digital Industries",
+"list": "B",
+"flags": ""
+},
+{
+"id": 469,
+"name": "GE Vernova France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 470,
+"name": "GE Grid Solutions",
+"list": "B",
+"flags": ""
+},
+{
+"id": 471,
+"name": "Grid Solutions SAS",
+"list": "B",
+"flags": ""
+},
+{
+"id": 472,
+"name": "GE Renewable Energy France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 473,
+"name": "GE Steam Power France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 474,
+"name": "GE Power Conversion France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 475,
+"name": "Hitachi Energy France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 476,
+"name": "Eaton France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 477,
+"name": "Eaton Electrical France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 478,
+"name": "Socomec",
+"list": "B",
+"flags": ""
+},
+{
+"id": 479,
+"name": "Socomec Group",
+"list": "B",
+"flags": ""
+},
+{
+"id": 480,
+"name": "Hager Group",
+"list": "B",
+"flags": ""
+},
+{
+"id": 481,
+"name": "Hager France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 482,
+"name": "Legrand France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 483,
+"name": "Legrand Data Center Solutions",
+"list": "B",
+"flags": ""
+},
+{
+"id": 484,
+"name": "Mersen",
+"list": "B",
+"flags": ""
+},
+{
+"id": 485,
+"name": "Mersen France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 486,
+"name": "nVent France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 487,
+"name": "Phoenix Contact France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 488,
+"name": "Wago France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 489,
+"name": "Weidmüller France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 490,
+"name": "Crouzet",
+"list": "B",
+"flags": ""
+},
+{
+"id": 491,
+"name": "Crouzet Automatismes",
+"list": "B",
+"flags": ""
+},
+{
+"id": 492,
+"name": "Crouzet Motors",
+"list": "B",
+"flags": ""
+},
+{
+"id": 493,
+"name": "Schmersal France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 494,
+"name": "Pilz France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 495,
+"name": "Sick France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 496,
+"name": "IFM Electronic France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 497,
+"name": "Omron Electronics France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 498,
+"name": "Rockwell Automation France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 499,
+"name": "Emerson Automation Solutions France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 500,
+"name": "Yokogawa France",
+"list": "B",
+"flags": ""
+},
+{
+"id": 501,
+"name": "Grand Paris Aménagement",
+"list": "A",
+"flags": ""
+},
+{
+"id": 502,
+"name": "Société des Grands Projets",
+"list": "A",
+"flags": ""
+},
+{
+"id": 503,
+"name": "EPA Paris-Saclay",
+"list": "A",
+"flags": ""
+},
+{
+"id": 504,
+"name": "EPA Sénart",
+"list": "A",
+"flags": ""
+},
+{
+"id": 505,
+"name": "EpaFrance (Marne-la-Vallée)",
+"list": "A",
+"flags": ""
+},
+{
+"id": 506,
+"name": "Établissement public foncier d'Île-de-France",
+"list": "A",
+"flags": ""
+},
+{
+"id": 507,
+"name": "LNE",
+"list": "A",
+"flags": ""
+},
+{
+"id": 508,
+"name": "CIRAD",
+"list": "A",
+"flags": ""
+},
+{
+"id": 509,
+"name": "IFREMER",
+"list": "A",
+"flags": ""
+},
+{
+"id": 510,
+"name": "Solinter",
+"list": "A",
+"flags": ""
+},
+{
+"id": 511,
+"name": "CSTB",
+"list": "A",
+"flags": ""
+},
+{
+"id": 512,
+"name": "IFP Énergies nouvelles",
+"list": "A",
+"flags": ""
+},
+{
+"id": 513,
+"name": "INERIS",
+"list": "A",
+"flags": ""
+},
+{
+"id": 514,
+"name": "BRGM",
+"list": "A",
+"flags": ""
+},
+{
+"id": 515,
+"name": "Civipol",
+"list": "A",
+"flags": ""
+},
+{
+"id": 516,
+"name": "Défense Conseil International",
+"list": "A",
+"flags": ""
+},
+{
+"id": 517,
+"name": "Odas",
+"list": "A",
+"flags": ""
+},
+{
+"id": 518,
+"name": "SOGEPA",
+"list": "A",
+"flags": ""
+},
+{
+"id": 519,
+"name": "Alcatel Submarine Networks",
+"list": "A",
+"flags": ""
+},
+{
+"id": 520,
+"name": "Eutelsat",
+"list": "A",
+"flags": ""
+},
+{
+"id": 521,
+"name": "Exxelia",
+"list": "A",
+"flags": ""
+},
+{
+"id": 522,
+"name": "GEAST",
+"list": "A",
+"flags": ""
+},
+{
+"id": 523,
+"name": "Adit",
+"list": "A",
+"flags": ""
+},
+{
+"id": 524,
+"name": "Haropa Port",
+"list": "A",
+"flags": ""
+},
+{
+"id": 530,
+"name": "Caisse nationale des autoroutes",
+"list": "A",
+"flags": ""
+},
+{
+"id": 531,
+"name": "Établissement public Paris La Défense",
+"list": "A",
+"flags": ""
+},
+{
+"id": 532,
+"name": "Syndicat des eaux d'Île-de-France (SEDIF)",
+"list": "A",
+"flags": ""
+},
+{
+"id": 533,
+"name": "SIPPEREC",
+"list": "A",
+"flags": ""
+},
+{
+"id": 534,
+"name": "Sogaris",
+"list": "A",
+"flags": ""
+},
+{
+"id": 535,
+"name": "Citeo",
+"list": "A",
+"flags": ""
+},
+{
+"id": 536,
+"name": "Bureau Veritas",
+"list": "A",
+"flags": ""
+},
+{
+"id": 537,
+"name": "Apave",
+"list": "A",
+"flags": ""
+},
+{
+"id": 538,
+"name": "Socotec",
+"list": "A",
+"flags": ""
+}
+],
+"alias": {
+"20": "ASNR",
+"21": "ASNR",
+"22": "ASNR",
+"266": "CEVA Logistics",
+"267": "CEVA Logistics"
+}
+}
