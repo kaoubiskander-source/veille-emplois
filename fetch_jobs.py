@@ -81,7 +81,7 @@ def adzuna_search():
             for o in r.get("results", []) or []:
                 out.append({"src": "Adzuna", "title": o.get("title"), "company": (o.get("company") or {}).get("display_name") or "",
                             "location": (o.get("location") or {}).get("display_name") or "", "contract": "CDI",
-                            "salary": ("%s-%s" % (o.get("salary_min"), o.get("salary_max"))) if o.get("salary_min") else "NA",
+                            "salary": ("%s-%s" % (o.get("salary_min"), o.get("salary_max"))) if (o.get("salary_min") and str(o.get("salary_is_predicted")) in ("0", "False", "false", "None", "")) else "NA",  # estimation Adzuna = NA
                             "date": (o.get("created") or "")[:10], "url": o.get("redirect_url") or "", "ref": o.get("id"),
                             "desc": (o.get("description") or "")[:600]})
             time.sleep(0.3)
