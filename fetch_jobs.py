@@ -123,6 +123,14 @@ def main():
     except Exception as e:
         print("France Travail : échec", e, file=sys.stderr)
     raw += adzuna_search()
+    cov = {}
+    try:
+        import ats
+        a, cov = ats.run([c for _, c in idx])
+        raw += a
+        print("Sites carrières : %d/%d entreprises couvertes, %d offres" % (cov["couvertes"], cov["total"], len(a)), file=sys.stderr)
+    except Exception as e:
+        print("Sites carrières : échec", e, file=sys.stderr)
     seen, jobs = set(), []
     for o in raw:
         if not keep(o): continue
@@ -138,7 +146,8 @@ def main():
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
     stats = {"date": dt.date.today().isoformat(), "lus": len(raw), "retenus": len(jobs),
              "dans_liste": len([j for j in jobs if j["wl"]]), "hors_liste": len([j for j in jobs if not j["wl"]])}
-    json.dump({"stats": stats, "jobs": jobs}, open(os.path.join(HERE, "out", "jobs.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
+    json.dump({"stats": stats, "ats": cov, "jobs": jobs}, open(os.path.join(HERE, "out", "jobs.json"), "w", encoding="utf-8"), ensure_ascii=False)
     print(json.dumps(stats, ensure_ascii=False))
 
 if __name__ == "__main__":
