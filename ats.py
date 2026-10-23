@@ -30,10 +30,10 @@ def slugs(name):
     out = []
     for x in (base, n):
         w = x.split()
-        for s in ("".join(w), "-".join(w)):
+        for s in ("".join(w), "-".join(w), "".join(w[:2]), w[0] if w else ""):
             if len(s) >= 5 and s not in out:
                 out.append(s)
-    return out[:5]
+    return out[:6]
 
 def get(url, timeout=15):
     req = urllib.request.Request(url, headers=UA)
@@ -93,6 +93,8 @@ def workday(host, tenant, site):
         off += 20
     return out
 
+DEBUG = []
+
 def workday_discover(s):
     """Devine le site Workday public : <s>.wdN.myworkdayjobs.com -> redirection vers /<langue>/<site>."""
     for n in (1, 3, 5, 12, 103, 501, 502):
@@ -103,6 +105,7 @@ def workday_discover(s):
                 parts = [p for p in urllib.parse.urlparse(r.geturl()).path.split("/") if p and not re.fullmatch(r"[a-z]{2}-[A-Z]{2}", p)]
         except Exception:
             continue
+        DEBUG.append("%s -> %s" % (host, "/".join(parts)))
         if parts:
             jobs = workday(host, s, parts[0])
             if jobs:
@@ -159,4 +162,4 @@ def run(companies):
                 found[cid] = [hit[0], hit[1], len(jobs)]
                 add(byid[cid], hit[0], jobs)
     return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()},
-                  "non_couvertes": [c["name"] for c in companies if c["id"] not in found]}
+                  "debug_workday": DEBUG[:40], "non_couvertes": [c["name"] for c in companies if c["id"] not in found]}
