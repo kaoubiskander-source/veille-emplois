@@ -1,0 +1,106 @@
+# -*- coding: utf-8 -*-
+"""Découverte automatique du site carrière de chaque entreprise (sans IA).
+Recherche web (DuckDuckGo HTML) -> pages candidates -> détection de l'ATS dans le HTML.
+Le résultat est mis en cache dans out/jobs.json (clé discovery) et réutilisé chaque jour."""
+import json, os, re, sys, time, urllib.request, urllib.parse
+from ats import norm, UA
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SKIP = re.compile(r"(indeed|linkedin|glassdoor|facebook|twitter|youtube|wikipedia|pagesjaunes|societe\.com|infogreffe|verif\.com|"
+                  r"hellowork|apec\.fr|jobijoba|monster|jooble|adzuna|talent\.com|jobteaser|cadremploi|regionsjob|welcometothejungle|"
+                  r"francetravail|pole-emploi|meteojob|optioncarriere|neuvoo|jobrapido|emploi-environnement|lesjeudis|kelio|stepstone)")
+PATS = [
+    ("workday", re.compile(r"https?://([a-z0-9-]+)\.(wd\d+)\.myworkdayjobs\.com/(?:[a-z]{2}-[A-Z]{2}/)?([A-Za-z0-9_.-]+)")),
+    ("smartrecruiters", re.compile(r"(?:careers|jobs)\.smartrecruiters\.com/([A-Za-z0-9_-]+)")),
+    ("greenhouse", re.compile(r"(?:boards|job-boards)\.greenhouse\.io/([A-Za-z0-9_-]+)")),
+    ("lever", re.compile(r"jobs\.lever\.co/([A-Za-z0-9_-]+)")),
+    ("recruitee", re.compile(r"https?://([a-z0-9-]+)\.recruitee\.com")),
+    ("workable", re.compile(r"apply\.workable\.com/([A-Za-z0-9_-]+)")),
+]
+OTHER = [("taleo", re.compile(r"https?://[a-z0-9.-]*taleo\.net/careersection/[^\s\"'<>]+")),
+         ("successfactors", re.compile(r"https?://[a-z0-9.-]*(?:successfactors\.(?:com|eu)|jobs\.sap\.com)/[^\s\"'<>]*")),
+         ("oracle", re.compile(r"https?://[a-z0-9.-]*oraclecloud\.com/hcmUI/CandidateExperience[^\s\"'<>]*")),
+         ("eightfold", re.compile(r"https?://[a-z0-9.-]*eightfold\.ai[^\s\"'<>]*")),
+         ("icims", re.compile(r"https?://[a-z0-9.-]*icims\.com[^\s\"'<>]*")),
+         ("jobaffinity", re.compile(r"https?://[a-z0-9.-]*jobaffinity\.fr[^\s\"'<>]*")),
+         ("talentsoft", re.compile(r"https?://[a-z0-9.-]*talent-soft\.com[^\s\"'<>]*"))]
+
+def web(url, data=None, timeout=15):
+    req = urllib.request.Request(url, data=data, headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+                                                          "Accept-Language": "fr-FR,fr;q=0.9"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read(900000).decode("utf-8", "replace")
+
+def search(q):
+    html = web("https://html.duckduckgo.com/html/", data=urllib.parse.urlencode({"q": q, "kl": "fr-fr"}).encode())
+    urls = []
+    for m in re.finditer(r'class="result__a"[^>]*href="([^"]+)"', html):
+        u = m.group(1)
+        if "uddg=" in u:
+            u = urllib.parse.unquote(u.split("uddg=")[1].split("&")[0])
+        if u.startswith("//"): u = "https:" + u
+        if u.startswith("http") and not SKIP.search(u) and u not in urls:
+            urls.append(u)
+    return urls[:6]
+
+def plausible(name, key):
+    toks = [t for t in norm(name).split() if len(t) >= 4]
+    k = norm(key).replace(" ", "")
+    return any(t in k or k in t for t in toks) if k else False
+
+def detect(name, html):
+    for label, rx in PATS:
+        for m in rx.finditer(html):
+            g = m.groups()
+            if label == "workday":
+                if plausible(name, g[0]):
+                    return {"t": "workday", "tenant": g[0], "host": "%s.%s.myworkdayjobs.com" % (g[0], g[1]), "site": g[2]}
+            elif plausible(name, g[0]):
+                return {"t": label, "slug": g[0]}
+    for label, rx in OTHER:
+        m = rx.search(html)
+        if m: return {"t": label, "url": m.group(0)[:200]}
+    return None
+
+def discover(name):
+    seen = []
+    try:
+        urls = search("%s offres d'emploi carrières recrutement" % name)
+    except Exception as e:
+        return {"t": "erreur", "err": str(e)[:80]}
+    for u in urls[:4]:
+        try:
+            html = web(u)
+        except Exception:
+            continue
+        seen.append(u)
+        d = detect(name, html)
+        if d:
+            d["page"] = u
+            return d
+    return {"t": "inconnu", "pages": seen[:2]}
+
+def load_cache():
+    try:
+        return json.load(open(os.path.join(HERE, "out", "jobs.json"), encoding="utf-8")).get("discovery") or {}
+    except Exception:
+        return {}
+
+def save_cache(c):
+    pass  # le cache est écrit dans out/jobs.json par fetch_jobs.py (clé "discovery")
+
+def run(companies, budget_s=3300):
+    """Découvre les entreprises pas encore traitées (ou en erreur) dans la limite de temps ; sauvegarde au fur et à mesure."""
+    cache, t0, n = load_cache(), time.time(), 0
+    for c in companies:
+        old = cache.get(c["id"])
+        if old and old.get("t") not in ("erreur",):
+            continue
+        if time.time() - t0 > budget_s:
+            break
+        cache[c["id"]] = dict(discover(c["name"]), name=c["name"])
+        n += 1
+        if n % 20 == 0: save_cache(cache)
+        time.sleep(2.0)
+    save_cache(cache)
+    return cache

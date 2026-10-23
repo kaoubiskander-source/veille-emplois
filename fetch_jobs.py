@@ -147,7 +147,8 @@ def main():
     stats = {"date": dt.date.today().isoformat(), "lus": len(raw), "retenus": len(jobs),
              "dans_liste": len([j for j in jobs if j["wl"]]), "hors_liste": len([j for j in jobs if not j["wl"]])}
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
-    json.dump({"stats": stats, "ats": cov, "jobs": jobs}, open(os.path.join(HERE, "out", "jobs.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    disc = cov.pop("_cache", {}) if isinstance(cov, dict) else {}
+    json.dump({"stats": stats, "ats": cov, "discovery": disc, "jobs": jobs}, open(os.path.join(HERE, "out", "jobs.json"), "w", encoding="utf-8"), ensure_ascii=False)
     print(json.dumps(stats, ensure_ascii=False))
 
 if __name__ == "__main__":

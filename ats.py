@@ -155,6 +155,25 @@ def run(companies):
                 add(c, "workday", jobs)
         except Exception as e:
             print("workday", w, e, file=sys.stderr)
+    # sites découverts automatiquement (cache out/discovery.json)
+    try:
+        import discover
+        cache = discover.run(companies)
+    except Exception as e:
+        print("découverte : échec", e, file=sys.stderr); cache = {}
+    for c in companies:
+        d = cache.get(c["id"]) or {}
+        try:
+            if d.get("t") == "workday":
+                jobs = workday(d["host"], d["tenant"], d["site"])
+            elif d.get("t") in ("greenhouse", "lever", "smartrecruiters", "recruitee", "workable"):
+                jobs = dict(READERS)[d["t"]](d["slug"])
+            else:
+                continue
+        except Exception as e:
+            print("lecture", c["name"], e, file=sys.stderr); continue
+        found[c["id"]] = [d["t"], d.get("slug") or d.get("tenant"), len(jobs)]
+        add(c, d["t"], jobs)
     todo = [c for c in companies if c["id"] not in found]
     with ThreadPoolExecutor(max_workers=24) as ex:
         for cid, hit, jobs in ex.map(probe, todo):
@@ -162,4 +181,5 @@ def run(companies):
                 found[cid] = [hit[0], hit[1], len(jobs)]
                 add(byid[cid], hit[0], jobs)
     return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()},
-                  "debug_workday": DEBUG[:40], "non_couvertes": [c["name"] for c in companies if c["id"] not in found]}
+                  "debug_workday": DEBUG[:40], "_cache": cache, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
+                  "decouverte": {t: sum(1 for v in cache.values() if v.get("t") == t) for t in set(v.get("t") for v in cache.values())}}
