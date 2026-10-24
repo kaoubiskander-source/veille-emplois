@@ -31,7 +31,22 @@ def web(url, data=None, timeout=15):
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read(900000).decode("utf-8", "replace")
 
+def brave(q):
+    url = "https://api.search.brave.com/res/v1/web/search?" + urllib.parse.urlencode({"q": q, "country": "fr", "search_lang": "fr", "count": 8})
+    req = urllib.request.Request(url, headers={"Accept": "application/json", "X-Subscription-Token": os.environ["BRAVE_API_KEY"]})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        res = json.loads(r.read().decode("utf-8", "replace")).get("web", {}).get("results", [])
+    urls = []
+    for x in res:
+        u = x.get("url", "")
+        if u.startswith("http") and not SKIP.search(u) and u not in urls:
+            urls.append(u)
+    time.sleep(1.1)  # limite gratuite : 1 requête / seconde
+    return urls[:6]
+
 def search(q):
+    if os.environ.get("BRAVE_API_KEY"):
+        return brave(q)
     html = web("https://html.duckduckgo.com/html/", data=urllib.parse.urlencode({"q": q, "kl": "fr-fr"}).encode())
     urls = []
     for m in re.finditer(r'class="result__a"[^>]*href="([^"]+)"', html):
@@ -94,7 +109,7 @@ def run(companies, budget_s=3300):
     cache, t0, n = load_cache(), time.time(), 0
     for c in companies:
         old = cache.get(c["id"])
-        if old and old.get("t") not in ("erreur",):
+        if old and old.get("t") != "erreur" and not (old.get("t") == "inconnu" and not old.get("pages")):
             continue
         if time.time() - t0 > budget_s:
             break
