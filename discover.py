@@ -18,7 +18,7 @@ PATS = [
     ("workable", re.compile(r"apply\.workable\.com/([A-Za-z0-9_-]+)")),
 ]
 OTHER = [("taleo", re.compile(r"https?://[a-z0-9.-]*taleo\.net/careersection/[^\s\"'<>]+")),
-         ("successfactors", re.compile(r"https?://[a-z0-9.-]*(?:successfactors\.(?:com|eu)|jobs\.sap\.com)/[^\s\"'<>]*")),
+         ("successfactors", re.compile(r"https?://(?:career\d*\.successfactors\.(?:com|eu)|jobs\.sap\.com)/[^\s\"'<>]*")),
          ("oracle", re.compile(r"https?://[a-z0-9.-]*oraclecloud\.com/hcmUI/CandidateExperience[^\s\"'<>]*")),
          ("eightfold", re.compile(r"https?://[a-z0-9.-]*eightfold\.ai[^\s\"'<>]*")),
          ("icims", re.compile(r"https?://[a-z0-9.-]*icims\.com[^\s\"'<>]*")),

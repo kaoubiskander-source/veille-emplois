@@ -112,6 +112,26 @@ def workday_discover(s):
                 return jobs
     return []
 
+def oracle(url):
+    """Oracle Recruiting Cloud (HCM CandidateExperience) : API REST publique, sans authentification."""
+    m = re.search(r"https://([^/]+)/hcmUI/CandidateExperience/(?:[A-Za-z_-]{2,6}/)?sites/([A-Za-z0-9_]+)", url)
+    if not m:
+        return []
+    host, site, out, off = m.group(1), m.group(2), [], 0
+    while off < 1000:
+        q = urllib.parse.urlencode({"onlyData": "true", "expand": "requisitionList.secondaryLocations",
+                                    "finder": "findReqs;siteNumber=%s,limit=50,offset=%d,sortBy=POSTING_DATES_DESC" % (site, off)})
+        r = get("https://%s/hcmRestApi/resources/latest/recruitingCEJobRequisitions?%s" % (host, q), timeout=25)
+        items = r.get("items") or []
+        c = (items[0].get("requisitionList") if items else None) or []
+        for j in c:
+            out.append(dict(title=j.get("Title"), location=j.get("PrimaryLocation", ""), date=(j.get("PostedDate") or "")[:10],
+                            url="https://%s/hcmUI/CandidateExperience/en/sites/%s/job/%s" % (host, site, j.get("Id")),
+                            ref="or%s" % j.get("Id"), contract="NC"))
+        if len(c) < 50: break
+        off += 50
+    return out
+
 READERS = [("greenhouse", greenhouse), ("lever", lever), ("smartrecruiters", smartrecruiters), ("recruitee", recruitee), ("workable", workable), ("workday", workday_discover)]
 
 def probe(c):
@@ -166,6 +186,8 @@ def run(companies):
         try:
             if d.get("t") == "workday":
                 jobs = workday(d["host"], d["tenant"], d["site"])
+            elif d.get("t") == "oracle":
+                jobs = oracle(d.get("url", ""))
             elif d.get("t") in ("greenhouse", "lever", "smartrecruiters", "recruitee", "workable"):
                 jobs = dict(READERS)[d["t"]](d["slug"])
             else:
@@ -174,7 +196,7 @@ def run(companies):
             print("lecture", c["name"], e, file=sys.stderr); continue
         found[c["id"]] = [d["t"], d.get("slug") or d.get("tenant"), len(jobs)]
         add(c, d["t"], jobs)
-    todo = [c for c in companies if c["id"] not in found]
+    todo = [c for c in companies if c["id"] not in found] if os.environ.get("PROBE") else []
     with ThreadPoolExecutor(max_workers=24) as ex:
         for cid, hit, jobs in ex.map(probe, todo):
             if hit:
