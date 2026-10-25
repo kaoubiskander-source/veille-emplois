@@ -182,7 +182,7 @@ def run(companies):
     except Exception as e:
         print("découverte : échec", e, file=sys.stderr); cache = {}
     for c in companies:
-        d = cache.get(c["id"]) or {}
+        d = cache.get(str(c["id"])) or {}
         try:
             if d.get("t") == "workday":
                 jobs = workday(d["host"], d["tenant"], d["site"])
@@ -202,7 +202,7 @@ def run(companies):
         import generic
         items = []
         for c in companies:
-            d = cache.get(c["id"]) or {}
+            d = cache.get(str(c["id"])) or {}
             if c["id"] in found: continue
             pages = [p for p in ([d.get("page")] + (d.get("pages") or [])) if p]
             if pages: items.append((c, pages))

@@ -135,7 +135,7 @@ def run(companies, budget_s=3300):
     """Découvre les entreprises pas encore traitées (ou en erreur) dans la limite de temps ; sauvegarde au fur et à mesure."""
     cache, t0, n, errs = load_cache(), time.time(), 0, 0
     for c in companies:
-        old = cache.get(c["id"])
+        old = cache.get(str(c["id"]))
         if old and old.get("t") != "erreur" and not (old.get("t") == "inconnu" and not old.get("pages")):
             continue
         if time.time() - t0 > budget_s:
@@ -149,7 +149,7 @@ def run(companies, budget_s=3300):
             if old and old.get("t") != "erreur": continue   # ne jamais écraser une bonne entrée par une erreur
         else:
             errs = 0
-        cache[c["id"]] = res
+        cache[str(c["id"])] = res
         if n % 20 == 0: save_cache(cache)
         time.sleep(2.0)
     save_cache(cache)
