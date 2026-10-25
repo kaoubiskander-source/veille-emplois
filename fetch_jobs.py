@@ -113,7 +113,12 @@ def keep(o):
         return False
     return True
 
+import threading as _th, os as _os
+def _wd():
+    print('WATCHDOG: arret force'); _os._exit(0)
+
 def main():
+    _t=_th.Timer(8400,_wd); _t.daemon=True; _t.start()
     idx, alias = load_companies()
     raw = []
     try:

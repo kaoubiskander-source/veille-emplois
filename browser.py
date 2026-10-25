@@ -95,8 +95,13 @@ async def amain(groups, budget_s, conc=5):
                 f, d, e = await visit(ctx, u, sem)
                 allj += f + d; err = e or err
             res[key] = (allj, err)
-        await asyncio.gather(*[one(k, v) for k, v in groups.items()])
-        await br.close()
+        tasks = [asyncio.ensure_future(one(k, v)) for k, v in groups.items()]
+        done, pending = await asyncio.wait(tasks, timeout=budget_s + 300)
+        for t in pending: t.cancel()
+        for k in groups:
+            res.setdefault(k, ([], "timeout"))
+        try: await asyncio.wait_for(br.close(), 30)
+        except Exception: pass
     return res
 
 def run(items, budget_s=2400):
