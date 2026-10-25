@@ -1,30 +1,59 @@
 name: veille-quotidienne
 on:
   schedule:
-    - cron: "17 4 * * *"   # 06h17 à Paris en été, 05h17 en hiver
+    - cron: "17 4 * * *"
   workflow_dispatch: {}
 permissions:
   contents: write
 jobs:
-  run:
+  shard:
     runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Récolte
+      - name: Recolte
         env:
+          SHARD: ${{ matrix.shard }}
+          NSHARDS: "20"
           FT_CLIENT_ID: ${{ secrets.FT_CLIENT_ID }}
           FT_CLIENT_SECRET: ${{ secrets.FT_CLIENT_SECRET }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
         run: python fetch_jobs.py
-      - name: Publier le résultat
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shard-${{ matrix.shard }}
+          path: out/shard-*.json
+          if-no-files-found: ignore
+  merge:
+    needs: shard
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          pattern: shard-*
+          merge-multiple: true
+      - name: Fusion
+        run: python merge.py
+      - name: Publier
         run: |
           git config user.name "veille-bot"
           git config user.email "veille-bot@users.noreply.github.com"
           git add out/jobs.json
-          git commit -m "veille $(date -u +%F)" || echo "rien à publier"
+          git commit -m "veille $(date -u +%F)" || echo "rien a publier"
           git push
