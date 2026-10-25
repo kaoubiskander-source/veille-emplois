@@ -95,26 +95,61 @@ def discover(name):
             return d
     return {"t": "inconnu", "pages": seen[:2]}
 
-def load_cache():
+def _cache_from(text):
     try:
-        return json.load(open(os.path.join(HERE, "out", "jobs.json"), encoding="utf-8")).get("discovery") or {}
+        return json.loads(text).get("discovery") or {}
     except Exception:
         return {}
+
+def load_cache():
+    """Cache de découverte : fichier courant + historique git (auto-réparation si un passage a écrasé le cache)."""
+    import subprocess
+    caches = []
+    try:
+        caches.append(_cache_from(open(os.path.join(HERE, "out", "jobs.json"), encoding="utf-8").read()))
+    except Exception:
+        pass
+    try:
+        subprocess.run(["git", "fetch", "--unshallow", "--quiet"], cwd=HERE, timeout=120)
+    except Exception:
+        pass
+    try:
+        shas = subprocess.run(["git", "log", "--format=%H", "-n", "25", "--", "out/jobs.json"], cwd=HERE, capture_output=True, text=True, timeout=60).stdout.split()
+        for sha in shas:
+            r = subprocess.run(["git", "show", "%s:out/jobs.json" % sha], cwd=HERE, capture_output=True, timeout=60)
+            caches.append(_cache_from(r.stdout.decode("utf-8", "replace")))
+    except Exception:
+        pass
+    merged = {}
+    for c in caches:                      # du plus récent au plus ancien
+        for k, v in c.items():
+            if k not in merged or (merged[k].get("t") in ("erreur",) and v.get("t") not in ("erreur",)):
+                merged[k] = v
+    print("cache découverte : %d entrées, %d utiles" % (len(merged), sum(1 for v in merged.values() if v.get("t") != "erreur")), file=sys.stderr)
+    return merged
 
 def save_cache(c):
     pass  # le cache est écrit dans out/jobs.json par fetch_jobs.py (clé "discovery")
 
 def run(companies, budget_s=3300):
     """Découvre les entreprises pas encore traitées (ou en erreur) dans la limite de temps ; sauvegarde au fur et à mesure."""
-    cache, t0, n = load_cache(), time.time(), 0
+    cache, t0, n, errs = load_cache(), time.time(), 0, 0
     for c in companies:
         old = cache.get(c["id"])
         if old and old.get("t") != "erreur" and not (old.get("t") == "inconnu" and not old.get("pages")):
             continue
         if time.time() - t0 > budget_s:
             break
-        cache[c["id"]] = dict(discover(c["name"]), name=c["name"])
+        res = dict(discover(c["name"]), name=c["name"])
         n += 1
+        if res.get("t") == "erreur":
+            errs += 1
+            if errs >= 8 and errs == n:      # 8 erreurs d'affilée dès le début : quota ou blocage, on s'arrête
+                print("découverte interrompue :", res.get("err"), file=sys.stderr); break
+            if old and old.get("t") != "erreur": continue   # ne jamais écraser une bonne entrée par une erreur
+        else:
+            errs = 0
+        cache[c["id"]] = res
         if n % 20 == 0: save_cache(cache)
         time.sleep(2.0)
     save_cache(cache)
