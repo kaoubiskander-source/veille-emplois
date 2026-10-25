@@ -206,7 +206,7 @@ def run(companies):
             if c["id"] in found: continue
             pages = [p for p in ([d.get("page")] + (d.get("pages") or [])) if p]
             if pages: items.append((c, pages))
-        graw, gdiag = generic.run(items, budget_s=1800)
+        graw, gdiag = generic.run(items, budget_s=900)
         raw += graw
         for c, _ in items:
             g = gdiag.get(c["name"]) or {}
@@ -224,7 +224,7 @@ def run(companies):
             if c["id"] in found: continue
             pages = [p for p in ([d.get("page"), d.get("url")] + (d.get("pages") or [])) if p and p.startswith("http")]
             if pages: items.append((c, pages))
-        braw, bdiag = browser.run(items, budget_s=1500)
+        braw, bdiag = browser.run(items, budget_s=900)
         raw += braw
         for c, _ in items:
             if (bdiag.get(c["name"]) or {}).get("navigateur"):

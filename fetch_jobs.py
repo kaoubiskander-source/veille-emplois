@@ -118,20 +118,22 @@ def _wd():
     print('WATCHDOG: arret force'); _os._exit(0)
 
 def main():
-    _t=_th.Timer(8400,_wd); _t.daemon=True; _t.start()
+    _t=_th.Timer(2600,_wd); _t.daemon=True; _t.start()
     idx, alias = load_companies()
     raw = []
+    NS = int(os.environ.get("NSHARDS", "1")); SH = int(os.environ.get("SHARD", "0"))
+    sub = [c for i, (_, c) in enumerate(sorted(idx, key=lambda x: x[1]["id"])) if i % NS == SH]
     try:
-        tok = ft_token()
+        tok = ft_token() if SH == 0 else None
         if tok: raw += ft_search(tok)
         else: print("France Travail : clés absentes, source ignorée", file=sys.stderr)
     except Exception as e:
         print("France Travail : échec", e, file=sys.stderr)
-    raw += adzuna_search()
+    if SH == 0: raw += adzuna_search()
     cov = {}
     try:
         import ats
-        a, cov = ats.run([c for _, c in idx])
+        a, cov = ats.run(sub)
         raw += a
         print("Sites carrières : %d/%d entreprises couvertes, %d offres" % (cov["couvertes"], cov["total"], len(a)), file=sys.stderr)
     except Exception as e:
@@ -154,7 +156,7 @@ def main():
         prev = json.load(open(os.path.join(HERE, "out", "jobs.json"), encoding="utf-8"))
     except Exception:
         pass
-    if not jobs and prev.get("jobs"):
+    if NS == 1 and not jobs and prev.get("jobs"):
         print("passage vide : conservation des offres précédentes", file=sys.stderr)
         jobs = prev["jobs"]; raw = raw or [None] * prev.get("stats", {}).get("lus", 0)
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
@@ -162,7 +164,7 @@ def main():
              "dans_liste": len([j for j in jobs if j["wl"]]), "hors_liste": len([j for j in jobs if not j["wl"]])}
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
     disc = cov.pop("_cache", {}) if isinstance(cov, dict) else {}
-    json.dump({"stats": stats, "ats": cov, "discovery": disc, "jobs": jobs}, open(os.path.join(HERE, "out", "jobs.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    json.dump({"stats": stats, "ats": cov, "discovery": disc, "jobs": jobs}, open(os.path.join(HERE, "out", ("jobs.json" if NS == 1 else "shard-%d.json" % SH)), "w", encoding="utf-8"), ensure_ascii=False)
     print(json.dumps(stats, ensure_ascii=False))
 
 if __name__ == "__main__":
