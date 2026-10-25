@@ -196,6 +196,24 @@ def run(companies):
             print("lecture", c["name"], e, file=sys.stderr); continue
         found[c["id"]] = [d["t"], d.get("slug") or d.get("tenant"), len(jobs)]
         add(c, d["t"], jobs)
+    # couche 2 : JSON-LD + sitemap pour toutes les entreprises non lues par API
+    gdiag = {}
+    try:
+        import generic
+        items = []
+        for c in companies:
+            d = cache.get(c["id"]) or {}
+            if c["id"] in found: continue
+            pages = [p for p in ([d.get("page")] + (d.get("pages") or [])) if p]
+            if pages: items.append((c, pages))
+        graw, gdiag = generic.run(items)
+        raw += graw
+        for c, _ in items:
+            g = gdiag.get(c["name"]) or {}
+            if g.get("jsonld") or g.get("sitemap_urls"):
+                found[c["id"]] = ["générique", "", g.get("jsonld", 0) + g.get("lues", 0)]
+    except Exception as e:
+        print("couche 2 : échec", e, file=sys.stderr)
     todo = [c for c in companies if c["id"] not in found] if os.environ.get("PROBE") else []
     with ThreadPoolExecutor(max_workers=24) as ex:
         for cid, hit, jobs in ex.map(probe, todo):
@@ -203,5 +221,5 @@ def run(companies):
                 found[cid] = [hit[0], hit[1], len(jobs)]
                 add(byid[cid], hit[0], jobs)
     return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()},
-                  "debug_workday": DEBUG[:40], "_cache": cache, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
+                  "debug_workday": DEBUG[:40], "_cache": cache, "generique": gdiag, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
                   "decouverte": {t: sum(1 for v in cache.values() if v.get("t") == t) for t in set(v.get("t") for v in cache.values())}}
