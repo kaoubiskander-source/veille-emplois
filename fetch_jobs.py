@@ -143,6 +143,15 @@ def main():
         o["list"] = ("A" if c["list"] == "A" else "B-liste") if c else "hors-liste"
         jobs.append(o)
     jobs.sort(key=lambda o: (o["date"] or ""), reverse=True)
+    # garde-fou : un passage qui ne lit rien n'écrase jamais les dernières bonnes offres
+    prev = {}
+    try:
+        prev = json.load(open(os.path.join(HERE, "out", "jobs.json"), encoding="utf-8"))
+    except Exception:
+        pass
+    if not jobs and prev.get("jobs"):
+        print("passage vide : conservation des offres précédentes", file=sys.stderr)
+        jobs = prev["jobs"]; raw = raw or [None] * prev.get("stats", {}).get("lus", 0)
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
     stats = {"date": dt.date.today().isoformat(), "lus": len(raw), "retenus": len(jobs),
              "dans_liste": len([j for j in jobs if j["wl"]]), "hors_liste": len([j for j in jobs if not j["wl"]])}

@@ -214,6 +214,23 @@ def run(companies):
                 found[c["id"]] = ["générique", "", g.get("jsonld", 0) + g.get("lues", 0)]
     except Exception as e:
         print("couche 2 : échec", e, file=sys.stderr)
+    # couche 3 : navigateur automatique pour toutes les entreprises encore non lues
+    bdiag = {}
+    try:
+        import browser
+        items = []
+        for c in companies:
+            d = cache.get(str(c["id"])) or {}
+            if c["id"] in found: continue
+            pages = [p for p in ([d.get("page"), d.get("url")] + (d.get("pages") or [])) if p and p.startswith("http")]
+            if pages: items.append((c, pages))
+        braw, bdiag = browser.run(items)
+        raw += braw
+        for c, _ in items:
+            if (bdiag.get(c["name"]) or {}).get("navigateur"):
+                found[c["id"]] = ["navigateur", "", bdiag[c["name"]]["navigateur"]]
+    except Exception as e:
+        print("couche 3 : échec", e, file=sys.stderr)
     todo = [c for c in companies if c["id"] not in found] if os.environ.get("PROBE") else []
     with ThreadPoolExecutor(max_workers=24) as ex:
         for cid, hit, jobs in ex.map(probe, todo):
@@ -221,5 +238,5 @@ def run(companies):
                 found[cid] = [hit[0], hit[1], len(jobs)]
                 add(byid[cid], hit[0], jobs)
     return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()},
-                  "debug_workday": DEBUG[:40], "_cache": cache, "generique": gdiag, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
+                  "debug_workday": DEBUG[:40], "_cache": cache, "generique": gdiag, "navigateur": bdiag, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
                   "decouverte": {t: sum(1 for v in cache.values() if v.get("t") == t) for t in set(v.get("t") for v in cache.values())}}
