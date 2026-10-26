@@ -3,7 +3,7 @@
 Sources : Jooble, CareerJet, Adzuna (APIs avec clé), Indeed (JobSpy), Brave (site: sur WTTJ/Apec/Hellowork/Indeed).
 Pour chaque entreprise : combien d'annonces de CETTE entreprise chaque source a vues (preuve de lecture),
 et les offres pertinentes (rôle + Île-de-France). Aucune IA."""
-import json, os, re, sys, time, threading, urllib.request, urllib.parse, base64
+import json, os, re, sys, time, threading, urllib.request, urllib.parse, urllib.error, base64
 from concurrent.futures import ThreadPoolExecutor
 import ats
 
@@ -22,8 +22,13 @@ def same_company(found, name):
 def _req(url, data=None, headers=None, method=None, timeout=25):
     h = {"User-Agent": UA, "Accept": "application/json"}; h.update(headers or {})
     req = urllib.request.Request(url, data=data, headers=h, method=method)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode("utf-8", "replace"))
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.loads(r.read().decode("utf-8", "replace"))
+    except urllib.error.HTTPError as e:
+        try: body = e.read().decode("utf-8", "replace")[:90].replace("\n", " ")
+        except Exception: body = ""
+        raise RuntimeError("HTTP %s %s" % (e.code, body))
 
 def jooble(name, key):
     out = []
@@ -37,13 +42,20 @@ def jooble(name, key):
         time.sleep(0.3)
     return out
 
+_DEAD = {}
+
 def careerjet(name, key):
+    if _DEAD.get("careerjet"): raise RuntimeError(_DEAD["careerjet"])
     out = []
     auth = base64.b64encode((key + ":").encode()).decode()
     for kw in (name, name + " commercial offres"):
         q = urllib.parse.urlencode({"locale_code": "fr_FR", "keywords": kw, "location": "Île-de-France", "user_ip": "81.250.10.10",
                                     "user_agent": UA, "page_size": 50, "page": 1, "sort": "date"})
-        r = _req("https://search.api.careerjet.net/v4/query?" + q, headers={"Authorization": "Basic " + auth, "Referer": "https://github.com/"})
+        try:
+            r = _req("https://search.api.careerjet.net/v4/query?" + q, headers={"Authorization": "Basic " + auth})
+        except RuntimeError as e:
+            if "HTTP 403" in str(e) or "HTTP 401" in str(e): _DEAD["careerjet"] = str(e)
+            raise
         for j in r.get("jobs", []) or []:
             if same_company(j.get("company"), name):
                 out.append(dict(title=re.sub(r"<[^>]+>", "", j.get("title") or ""), company=j.get("company"), location=j.get("locations") or "",
@@ -90,9 +102,14 @@ def indeed(name):
     return out
 
 def brave(name, key):
+    if _DEAD.get("brave"): raise RuntimeError(_DEAD["brave"])
     q = '"%s" offre emploi (site:welcometothejungle.com OR site:apec.fr OR site:hellowork.com OR site:fr.indeed.com OR site:linkedin.com/jobs)' % name
-    r = _req("https://api.search.brave.com/res/v1/web/search?" + urllib.parse.urlencode({"q": q, "count": 20, "country": "fr"}),
-             headers={"X-Subscription-Token": key})
+    try:
+        r = _req("https://api.search.brave.com/res/v1/web/search?" + urllib.parse.urlencode({"q": q, "count": 20, "country": "fr"}),
+                 headers={"X-Subscription-Token": key})
+    except RuntimeError as e:
+        if "HTTP 402" in str(e) or "HTTP 401" in str(e) or "HTTP 403" in str(e): _DEAD["brave"] = "Brave indisponible (quota/clé): " + str(e)[:50]
+        raise
     out = []
     for w in (r.get("web") or {}).get("results", []) or []:
         t = re.sub(r"<[^>]+>", "", w.get("title") or "")
@@ -118,7 +135,7 @@ def role_search(which, keywords):
                 for pg in (1, 2):
                     q = urllib.parse.urlencode({"locale_code": "fr_FR", "keywords": kw, "location": "Île-de-France", "user_ip": "81.250.10.10", "user_agent": UA,
                                                 "page_size": 50, "page": pg, "sort": "date", "contract_type": "p"})
-                    r = _req("https://search.api.careerjet.net/v4/query?" + q, headers={"Authorization": "Basic " + auth, "Referer": "https://github.com/"})
+                    r = _req("https://search.api.careerjet.net/v4/query?" + q, headers={"Authorization": "Basic " + auth})
                     for j in r.get("jobs", []) or []:
                         out.append(dict(src="Job board (careerjet)", title=re.sub(r"<[^>]+>", "", j.get("title") or ""), company=j.get("company") or "", location=j.get("locations") or "",
                                         contract="NC", salary=j.get("salary") or "NA", date=(j.get("date") or "")[:10], url=j.get("url") or "", ref="cj%s" % (j.get("url") or "")[-60:], desc=re.sub(r"<[^>]+>", "", j.get("description") or "")[:600]))
