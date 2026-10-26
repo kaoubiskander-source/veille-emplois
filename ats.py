@@ -81,16 +81,31 @@ def workable(s):
     return [dict(title=j.get("title"), location="%s %s" % (j.get("city", ""), j.get("country", "")), url=j.get("url", ""),
                  date=(j.get("published_on") or "")[:10], ref="wk%s" % j.get("shortcode"), contract="NC") for j in r.get("jobs", [])]
 
-def workday(host, tenant, site):
-    out, off = [], 0
-    while off < 1000:
-        r = post("https://%s/wday/cxs/%s/%s/jobs" % (host, tenant, site), {"appliedFacets": {}, "limit": 20, "offset": off, "searchText": ""})
+WD_TERMS = ["appel d'offres", "bid", "proposal", "offres", "chiffrage", "key account", "grands comptes", "commercial",
+            "ingénieur d'affaires", "business manager", "account manager", "sales", "directeur commercial", "affaires"]
+
+def _wd_pages(host, tenant, site, text, seen, out, cap=1000):
+    off = 0
+    while off < cap:
+        r = post("https://%s/wday/cxs/%s/%s/jobs" % (host, tenant, site), {"appliedFacets": {}, "limit": 20, "offset": off, "searchText": text})
         c = r.get("jobPostings") or []
         for j in c:
-            out.append(dict(title=j.get("title"), location=j.get("locationsText", ""), url="https://%s/%s%s" % (host, site, j.get("externalPath", "")),
-                            date="", ref="wd%s" % j.get("externalPath"), contract="NC"))
+            p = j.get("externalPath")
+            if p in seen: continue
+            seen.add(p)
+            out.append(dict(title=j.get("title"), location=j.get("locationsText", ""), url="https://%s/%s%s" % (host, site, p or ""),
+                            date="", ref="wd%s" % p, contract="NC"))
         if len(c) < 20: break
         off += 20
+    return off
+
+def workday(host, tenant, site):
+    out, seen = [], set()
+    reached = _wd_pages(host, tenant, site, "", seen, out)
+    if reached >= 980:  # plafond Workday : on complète par recherches ciblées par mots-clés
+        for t in WD_TERMS:
+            try: _wd_pages(host, tenant, site, t, seen, out)
+            except Exception: continue
     return out
 
 DEBUG = []
@@ -190,6 +205,10 @@ def run(companies):
                 jobs = oracle(d.get("url", ""))
             elif d.get("t") in ("greenhouse", "lever", "smartrecruiters", "recruitee", "workable"):
                 jobs = dict(READERS)[d["t"]](d["slug"])
+            elif d.get("t") in ("successfactors", "talentsoft", "icims", "jobaffinity"):
+                import htmlats
+                jobs = htmlats.read(d["t"], d.get("url", ""))
+                if len(jobs) < 3: continue  # illisible : couches suivantes / job boards
             else:
                 continue
         except Exception as e:
@@ -206,7 +225,7 @@ def run(companies):
             if c["id"] in found: continue
             pages = [p for p in ([d.get("page")] + (d.get("pages") or [])) if p]
             if pages: items.append((c, pages))
-        graw, gdiag = generic.run(items, budget_s=900)
+        graw, gdiag = generic.run(items, budget_s=500)
         raw += graw
         for c, _ in items:
             g = gdiag.get(c["name"]) or {}
@@ -224,13 +243,30 @@ def run(companies):
             if c["id"] in found: continue
             pages = [p for p in ([d.get("page"), d.get("url")] + (d.get("pages") or [])) if p and p.startswith("http")]
             if pages: items.append((c, pages))
-        braw, bdiag = browser.run(items, budget_s=900)
+        braw, bdiag = browser.run(items, budget_s=600)
         raw += braw
         for c, _ in items:
             if (bdiag.get(c["name"]) or {}).get("navigateur", 0) >= 3 and not browser.AGG.search((bdiag.get(c["name"]) or {}).get("site", "")):
                 found[c["id"]] = ["navigateur", "", bdiag[c["name"]]["navigateur"]]
     except Exception as e:
         print("couche 3 : échec", e, file=sys.stderr)
+    # filet 2 : job boards, entreprise par entreprise (toutes, pas seulement les non lues)
+    bodiag = {}
+    try:
+        import boards
+        braw, bodiag = boards.run(companies, budget_s=700)
+        raw += braw
+    except Exception as e:
+        print("filet 2 job boards : échec", e, file=sys.stderr)
+    statut = {}
+    for c in companies:
+        n = c["name"]; bd = bodiag.get(n) or {}
+        tot = sum((bd.get("n") or {}).values())
+        if c["id"] in found: statut[n] = "site"
+        elif tot >= 1: statut[n] = "board"
+        elif len(bd.get("ok") or []) >= 2 and len(bd.get("err") or {}) == 0: statut[n] = "aucune offre (vérifié)"
+        elif len(bd.get("ok") or []) >= 2: statut[n] = "aucune offre (vérifié, sources partielles)"
+        else: statut[n] = "non vérifiée"
     todo = [c for c in companies if c["id"] not in found] if os.environ.get("PROBE") else []
     with ThreadPoolExecutor(max_workers=24) as ex:
         for cid, hit, jobs in ex.map(probe, todo):
@@ -238,7 +274,7 @@ def run(companies):
                 found[cid] = [hit[0], hit[1], len(jobs)]
                 add(byid[cid], hit[0], jobs)
     return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()},
-                  "debug_workday": DEBUG[:40], "_cache": cache, "generique": gdiag, "navigateur": bdiag, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
+                  "debug_workday": DEBUG[:40], "_cache": cache, "boards": bodiag, "statut": statut, "generique": gdiag, "navigateur": bdiag, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
                   "raison": {c["name"]: (("aucune page carrière trouvée" if not [p for p in ([(cache.get(str(c["id"])) or {}).get("page")] + ((cache.get(str(c["id"])) or {}).get("pages") or [])) if p] else
                              "page carrière sans offre lisible (plan du site sans fiches / navigateur 0)")) for c in companies if c["id"] not in found},
                   "decouverte": {t: sum(1 for v in cache.values() if v.get("t") == t) for t in set(v.get("t") for v in cache.values())}}

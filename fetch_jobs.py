@@ -118,7 +118,7 @@ def _wd():
     print('WATCHDOG: arret force'); _os._exit(0)
 
 def main():
-    _t=_th.Timer(2600,_wd); _t.daemon=True; _t.start()
+    _t=_th.Timer(3000,_wd); _t.daemon=True; _t.start()
     idx, alias = load_companies()
     raw = []
     NS = int(os.environ.get("NSHARDS", "1")); SH = int(os.environ.get("SHARD", "0"))
@@ -130,6 +130,13 @@ def main():
     except Exception as e:
         print("France Travail : échec", e, file=sys.stderr)
     if SH == 0: raw += adzuna_search()
+    # recherche par métier sur les job boards (offres hors liste) : un board par shard
+    try:
+        import boards
+        which = {1: "jooble", 2: "careerjet", 3: "indeed"}.get(SH)
+        if which: raw += boards.role_search(which, KEYWORDS)
+    except Exception as e:
+        print("recherche métier boards : échec", e, file=sys.stderr)
     cov = {}
     try:
         import ats
