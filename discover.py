@@ -8,7 +8,8 @@ from ats import norm, UA
 HERE = os.path.dirname(os.path.abspath(__file__))
 SKIP = re.compile(r"(indeed|linkedin|glassdoor|facebook|twitter|youtube|wikipedia|pagesjaunes|societe\.com|infogreffe|verif\.com|"
                   r"hellowork|apec\.fr|jobijoba|monster|jooble|adzuna|talent\.com|jobteaser|cadremploi|regionsjob|welcometothejungle|"
-                  r"francetravail|pole-emploi|meteojob|optioncarriere|neuvoo|jobrapido|emploi-environnement|lesjeudis|kelio|stepstone)")
+                  r"francetravail|pole-emploi|meteojob|optioncarriere|neuvoo|jobrapido|emploi-environnement|lesjeudis|kelio|stepstone|"
+                  r"aeroemploiformation|jobted|jobtransport|choisirleservicepublic|jobsora|makesense|talent-soft\.com/accueil|emploi-store|jobbird|vivastreet|leboncoin|studyrama|aufeminin|journaldunet|ouestfrance-emploi|lalettredelaprofession|clicandjob|jobintree|keljob|figaro|talent\.io|hiredly|indeed)")
 PATS = [
     ("workday", re.compile(r"https?://([a-z0-9-]+)\.(wd\d+)\.myworkdayjobs\.com/(?:[a-z]{2}-[A-Z]{2}/)?([A-Za-z0-9_.-]+)")),
     ("smartrecruiters", re.compile(r"(?:careers|jobs)\.smartrecruiters\.com/([A-Za-z0-9_-]+)")),
@@ -136,7 +137,8 @@ def run(companies, budget_s=3300):
     cache, t0, n, errs = load_cache(), time.time(), 0, 0
     for c in companies:
         old = cache.get(str(c["id"]))
-        if old and old.get("t") != "erreur" and not (old.get("t") == "inconnu" and not old.get("pages")):
+        bad = old and SKIP.search(" ".join(str(old.get(k) or "") for k in ("page", "url", "host")) + " " + " ".join(old.get("pages") or []))
+        if old and not bad and old.get("t") != "erreur" and not (old.get("t") == "inconnu" and not old.get("pages")):
             continue
         if time.time() - t0 > budget_s:
             break

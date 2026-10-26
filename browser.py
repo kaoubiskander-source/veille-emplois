@@ -9,6 +9,7 @@ TITLE_KEYS = ("title", "jobTitle", "job_title", "Title", "name", "text", "positi
 URL_KEYS = ("url", "absolute_url", "applyUrl", "jobUrl", "hostedUrl", "link", "detailUrl", "externalPath", "canonicalUrl", "href", "slug")
 JOBHREF = re.compile(r"(job|offre|emploi|career|carriere|vacanc|position|poste|req|detail|apply|recrut)", re.I)
 SKIPJSON = re.compile(r"(analytics|google|facebook|doubleclick|hotjar|cookie|consent|onetrust|tagmanager|sentry|segment|clarity|adobe|linkedin\.com/px)", re.I)
+AGG = re.compile(r"(aeroemploiformation|jobted|jobtransport|choisirleservicepublic|jobsora|makesense|indeed|hellowork|linkedin|jooble|jobijoba)", re.I)
 MORE = re.compile(r"(voir plus|afficher plus|charger plus|load more|show more|plus d.offres|suivant|next)", re.I)
 REJECT = re.compile(r"(tout refuser|refuser|reject all|decline|continuer sans accepter)", re.I)
 

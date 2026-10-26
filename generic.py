@@ -68,9 +68,15 @@ def sitemap_urls(origin, maxfiles=10):
             urls += [x for x in locs if JOBURL.search(x)]
     return urls
 
+def regdom(u):
+    h = urllib.parse.urlparse(u).netloc.lower().split(":")[0].split(".")
+    return ".".join(h[-2:]) if len(h) >= 2 else ".".join(h)
+
+DETAIL = re.compile(r"/(job|jobs|offre|offres|offre-emploi|emploi|poste|postes|career|careers|carriere|carrieres|vacancy|vacancies|position|positions|recrutement|stellenangebote)[^/]*/[^/]+", re.I)
+
 def read_company(name, pages):
     """Renvoie (offres, diagnostic)."""
-    diag = {"jsonld": 0, "sitemap_urls": 0, "lues": 0}
+    diag = {"jsonld": 0, "sitemap_urls": 0, "lues": 0, "jobs_sm": 0}
     offers, done = [], set()
     for page in pages[:2]:
         try:
@@ -83,8 +89,9 @@ def read_company(name, pages):
         origin = "%s://%s" % (pu.scheme, pu.netloc)
         if origin in done: continue
         done.add(origin)
-        urls = sitemap_urls(origin)
+        urls = [u for u in sitemap_urls(origin) if regdom(u) == regdom(page)]
         diag["sitemap_urls"] += len(urls)
+        diag["jobs_sm"] += sum(1 for u in urls if DETAIL.search(urllib.parse.urlparse(u).path) and (re.search(r"\d", u.rsplit("/", 1)[-1]) or u.rsplit("/", 1)[-1].count("-") >= 3))
         cand = []
         for u in urls:
             slug = urllib.parse.unquote(u.rstrip("/").split("/")[-1]).replace("-", " ").replace("_", " ")

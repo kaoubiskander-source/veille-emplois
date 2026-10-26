@@ -210,7 +210,7 @@ def run(companies):
         raw += graw
         for c, _ in items:
             g = gdiag.get(c["name"]) or {}
-            if g.get("jsonld") or g.get("sitemap_urls"):
+            if g.get("jsonld") or g.get("jobs_sm", 0) >= 3:
                 found[c["id"]] = ["générique", "", g.get("jsonld", 0) + g.get("lues", 0)]
     except Exception as e:
         print("couche 2 : échec", e, file=sys.stderr)
@@ -227,7 +227,7 @@ def run(companies):
         braw, bdiag = browser.run(items, budget_s=900)
         raw += braw
         for c, _ in items:
-            if (bdiag.get(c["name"]) or {}).get("navigateur"):
+            if (bdiag.get(c["name"]) or {}).get("navigateur", 0) >= 3 and not browser.AGG.search((bdiag.get(c["name"]) or {}).get("site", "")):
                 found[c["id"]] = ["navigateur", "", bdiag[c["name"]]["navigateur"]]
     except Exception as e:
         print("couche 3 : échec", e, file=sys.stderr)
@@ -239,4 +239,6 @@ def run(companies):
                 add(byid[cid], hit[0], jobs)
     return raw, {"couvertes": len(found), "total": len(companies), "detail": {byid[k]["name"]: v for k, v in found.items()},
                   "debug_workday": DEBUG[:40], "_cache": cache, "generique": gdiag, "navigateur": bdiag, "non_couvertes": [c["name"] for c in companies if c["id"] not in found],
+                  "raison": {c["name"]: (("aucune page carrière trouvée" if not [p for p in ([(cache.get(str(c["id"])) or {}).get("page")] + ((cache.get(str(c["id"])) or {}).get("pages") or [])) if p] else
+                             "page carrière sans offre lisible (plan du site sans fiches / navigateur 0)")) for c in companies if c["id"] not in found},
                   "decouverte": {t: sum(1 for v in cache.values() if v.get("t") == t) for t in set(v.get("t") for v in cache.values())}}
