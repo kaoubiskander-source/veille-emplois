@@ -36,5 +36,16 @@ if not jobs and prev.get("jobs"):
 stats = {"date": dt.date.today().isoformat(), "lus": lus, "retenus": len(jobs),
          "dans_liste": len([j for j in jobs if j.get("wl")]), "hors_liste": len([j for j in jobs if not j.get("wl")]), "shards": len(shards)}
 json.dump({"stats": stats, "ats": ats, "discovery": disc, "jobs": jobs}, open(os.path.join(out, "jobs.json"), "w", encoding="utf-8"), ensure_ascii=False)
+st = ats.get("statut") or {}
+cnt = {}
+for v in st.values(): cnt[v] = cnt.get(v, 0) + 1
+tot = len(st) or 1
+lues = cnt.get("site", 0) + cnt.get("board", 0)
+verif = lues + cnt.get("aucune offre (vérifié)", 0) + cnt.get("aucune offre (vérifié, sources partielles)", 0)
+cov = {"date": stats["date"], "total": len(st), "lues_site": cnt.get("site", 0), "lues_board": cnt.get("board", 0), "aucune_offre_verifiee": cnt.get("aucune offre (vérifié)", 0) + cnt.get("aucune offre (vérifié, sources partielles)", 0),
+       "non_verifiees": cnt.get("non vérifiée", 0), "pct_lues": round(100.0 * lues / tot, 1), "pct_verifiees": round(100.0 * verif / tot, 1),
+       "non_lues": {n: {"statut": v, "raison": (ats.get("raison") or {}).get(n, ""), "boards": (ats.get("boards") or {}).get(n, {}).get("err", {})} for n, v in st.items() if v not in ("site", "board")}}
+json.dump(cov, open(os.path.join(out, "coverage.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+print("COUVERTURE", json.dumps({k: v for k, v in cov.items() if k != "non_lues"}, ensure_ascii=False))
 for p in glob.glob(os.path.join(out, "shard-*.json")): os.remove(p)
 print(json.dumps(stats, ensure_ascii=False), "couvertes", ats["couvertes"], "/", ats["total"])
