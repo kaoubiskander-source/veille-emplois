@@ -6,7 +6,7 @@ import json, os, re, sys, time, urllib.request, urllib.parse
 from ats import norm, UA
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SKIP = re.compile(r"(indeed|linkedin|glassdoor|facebook|twitter|youtube|wikipedia|pagesjaunes|societe\.com|infogreffe|verif\.com|"
+SKIP = re.compile(r"(rekrute|lindustrie-recrute|cadremploi|apec\.fr|monster|regionsjob|meteojob|talent\.com|optioncarriere|neuvoo|francetravail|pole-emploi|emploi-territorial|welcometothejungle|jobteaser|emploipublic|jobrapido|careerjet|choisirleservicepublic|indeed|linkedin|glassdoor|facebook|twitter|youtube|wikipedia|pagesjaunes|societe\.com|infogreffe|verif\.com|"
                   r"hellowork|apec\.fr|jobijoba|monster|jooble|adzuna|talent\.com|jobteaser|cadremploi|regionsjob|welcometothejungle|"
                   r"francetravail|pole-emploi|meteojob|optioncarriere|neuvoo|jobrapido|emploi-environnement|lesjeudis|kelio|stepstone|"
                   r"aeroemploiformation|jobted|jobtransport|choisirleservicepublic|jobsora|makesense|talent-soft\.com/accueil|emploi-store|jobbird|vivastreet|leboncoin|studyrama|aufeminin|journaldunet|ouestfrance-emploi|lalettredelaprofession|clicandjob|jobintree|keljob|figaro|talent\.io|hiredly|indeed)")

@@ -9,7 +9,7 @@ TITLE_KEYS = ("title", "jobTitle", "job_title", "Title", "name", "text", "positi
 URL_KEYS = ("url", "absolute_url", "applyUrl", "jobUrl", "hostedUrl", "link", "detailUrl", "externalPath", "canonicalUrl", "href", "slug")
 JOBHREF = re.compile(r"(job|offre|emploi|career|carriere|vacanc|position|poste|req|detail|apply|recrut)", re.I)
 SKIPJSON = re.compile(r"(analytics|google|facebook|doubleclick|hotjar|cookie|consent|onetrust|tagmanager|sentry|segment|clarity|adobe|linkedin\.com/px)", re.I)
-AGG = re.compile(r"(aeroemploiformation|jobted|jobtransport|choisirleservicepublic|jobsora|makesense|indeed|hellowork|linkedin|jooble|jobijoba)", re.I)
+AGG = re.compile(r"(aeroemploiformation|jobted|jobtransport|choisirleservicepublic|jobsora|makesense|indeed|hellowork|linkedin|jooble|jobijoba|rekrute|lindustrie-recrute|cadremploi|apec\.fr|monster|regionsjob|meteojob|talent\.com|optioncarriere|neuvoo|glassdoor|francetravail|pole-emploi|emploi-territorial|welcometothejungle|jobteaser|staffsante|emploi\.sncf|lesjeudis|emploipublic|talent-?\w*\.com|jobrapido|adzuna|careerjet|kelio|studyrama|letudiant|emploi-store)", re.I)
 MORE = re.compile(r"(voir plus|afficher plus|charger plus|load more|show more|plus d.offres|suivant|next)", re.I)
 REJECT = re.compile(r"(tout refuser|refuser|reject all|decline|continuer sans accepter)", re.I)
 
@@ -120,6 +120,8 @@ def run(items, budget_s=2400):
         for c in members[host]:
             diags[c["name"]] = {"navigateur": len(jobs), "err": err, "site": host}
         c0 = members[host][0]
+        if AGG.search(host):
+            jobs = []  # agrégateur : jamais une source fiable pour une entreprise
         for j in jobs:
             k = (ats.norm(j["title"]), j["url"])
             if k in seen or not j.get("title"): continue

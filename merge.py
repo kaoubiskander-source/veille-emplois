@@ -19,6 +19,7 @@ for s in shards:
     a = s.get("ats") or {}
     ats["couvertes"] += a.get("couvertes", 0); ats["total"] += a.get("total", 0)
     for key in ("detail", "generique", "navigateur"): ats[key].update(a.get(key) or {})
+    ats.setdefault("raison", {}).update(a.get("raison") or {})
     ats["non_couvertes"] += a.get("non_couvertes", [])
     ats["debug_workday"] += (a.get("debug_workday") or [])[:5]
     for t, n in (a.get("decouverte") or {}).items(): ats["decouverte"][t] = max(ats["decouverte"].get(t, 0), n)
